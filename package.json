@@ -12,7 +12,8 @@
     "url": "https://github.com/KamilMroczek/media-beat.git"
   },
   "dependencies" : {
-    "tako":"*"
+    "restify":"*",
+    "filed":"*"
   },
   "author": "",
   "license": "BSD",
