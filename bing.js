@@ -8,7 +8,7 @@ var url = require('url')
 var ACCOUNT_KEY = 'SVNIL0U4Y09mM2oyL1l0M2hPeVQxaUFGRXR3bWQ3YnR4THI0SHZhdUwzdzpJU0gvRThjT2YzajIvWXQzaE95VDFpQUZFdHdtZDdidHhMcjRIdmF1TDN3'
   , IMAGE_URL = 'https://api.datamarket.azure.com/Bing/Search/Image'
 
-module.exports = function(mood, artist, cb) {
+module.exports = function(query, cb) {
   var urlObj = url.parse(IMAGE_URL)
   urlObj.query = {
       Query : "'"+artist+"'"
