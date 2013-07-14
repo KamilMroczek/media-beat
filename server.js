@@ -4,6 +4,7 @@ var restify = require('restify')
   , filed = require('filed')
   , port = 8081
   , bing = require('./bing.js')
+  , lyrics = require('./lyrics.js')
 
 server.get('static/:filename', function (req, res) {
   var filename = path.join(__dirname, 'static',  req.params.filename)
