@@ -6,8 +6,6 @@
 
 
 $(document).ready(function () {
-
-
 	var searchForm = $('#search_form')
     , searchBox = $('#search_box')
     , resultsDiv = $('#search_results')
@@ -56,6 +54,14 @@ $(document).ready(function () {
   playPause.on('click', function() {
     R.player.togglePause()
     updateUI()
+  })
+
+  //taher, here is the image API
+  getImages(function(images) {
+    images.forEach(function(img) {
+      var imgHtml = $('<img src="'+img.url+'" height="'+img.height+'" width="'+img.width+'"></img>')
+      $('body').append(imgHtml)
+    })
   })
 })
 
