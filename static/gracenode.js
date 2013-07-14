@@ -11,7 +11,7 @@ var getTrackMood = function(cb) {
       success: function(results){
         trackData = extractRelevantTrackData(results);
         tempoTiming = getTempoTiming(trackData["tempo"])
-        cb({"mood": trackData["mood"], "tempo": tempo})
+        cb({"mood": trackData["mood"], "tempo": tempoTiming})
       }
   });
 };
