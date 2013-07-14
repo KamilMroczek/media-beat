@@ -26,15 +26,15 @@ extractRelevantTrackData = function(results) {
     if(results["mood"] && results["mood"]["1"]) {
       trackData["mood"] = results["mood"]["1"]["TEXT"];
     } else {
-      alert("no mood!");
+      console.log("no mood!");
     }
     if(results["tempo"] && results["tempo"]["1"]) {
       trackData["tempo"] = results["tempo"]["1"]["TEXT"];
     } else {
-      alert("no tempo!");
+      console.log("no tempo!");
     }
   } else {
-    alert("results is null!");
+    console.log("results is null!");
   }
 
   return trackData;
