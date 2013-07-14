@@ -13,7 +13,8 @@
   },
   "dependencies" : {
     "restify":"*",
-    "filed":"*"
+    "filed":"*",
+    "request":"*"
   },
   "author": "",
   "license": "BSD",
