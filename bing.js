@@ -9,25 +9,21 @@ var ACCOUNT_KEY = 'SVNIL0U4Y09mM2oyL1l0M2hPeVQxaUFGRXR3bWQ3YnR4THI0SHZhdUwzdzpJU
   , IMAGE_URL = 'https://api.datamarket.azure.com/Bing/Search/Image'
 
 module.exports = function(mood, artist, cb) {
-  //var urlObj = url.parse(IMAGE_URL)
-  //urlObj.query = {
-  //    Query : '\'feelinggood\''
-  //  , '$format' : 'json'
-  //}
+  var urlObj = url.parse(IMAGE_URL)
+  urlObj.query = {
+      Query : "'"+artist+"'"
+    , '$format' : 'json'
+  }
 
-  //console.log(urlObj.format())
+  var options = {
+      url : urlObj.format()
+    , headers : { Authorization : 'Basic ' + ACCOUNT_KEY }
+  }
 
-  //var options = {
-  //    url : urlObj.format()
-  //  , headers : { Authorization : 'Basic ' + ACCOUNT_KEY }
-  //}
-  //request = request(options, function(err, res, body) {
-  //  var json = JSON.parse(body)
-  //  //console.log('bing response: \n\t' + json)
-  //  handleResults(json, cb)
-  //})
-  fs.readFile(path.join(__dirname, 'bing-results.json'), function (err, res) {
-    handleResults(JSON.parse(res.toString('utf8')), cb)
+  request(options, function(err, res, body) {
+    var json = JSON.parse(body)
+    //console.log('bing response: \n\t' + json)
+    handleResults(json, cb)
   })
 }
 
@@ -40,6 +36,6 @@ function handleResults(json, cb) {
     obj.url = itm.MediaUrl
     ret.push(obj)
   })
-  console.log(ret)
+  //console.log(ret)
   cb(ret)
 }

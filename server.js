@@ -5,7 +5,6 @@ var restify = require('restify')
   , port = 8081
   , bing = require('./bing.js')
 
-//bing()
 
 server.get('static/:filename', function (req, res) {
   var filename = path.join(__dirname, 'static',  req.params.filename)
@@ -16,8 +15,10 @@ server.get('static/:filename', function (req, res) {
 server.get('/', function(req, res){
   filed(path.join(__dirname, '/static/home.html')).pipe(res)
 })
-server.get('/images', function(req, res) {
-  bing('feeling adventurous', 'radiohead', function(arr) {
+//TODO mood
+server.get('/images/:artist', function (req, res) {
+  console.log('getting images for artist: ' + req.params.artist)
+  bing('feeling adventurous', req.params.artist, function(arr) {
     res.setHeader('Content-Type', 'application/json')
     console.log('returning images')
     res.end(JSON.stringify({images : JSON.stringify(arr)}))
