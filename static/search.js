@@ -89,16 +89,27 @@ $(document).ready(function () { R.ready(function() {
   //animate through images
   var intervalId
   function animateThroughImages() {
-    //headerDiv.css('hidden', 0.0)
-    imageResults.on('click', function() {
+    var nivo = $('#slider')
+    nivo.empty()
+    allImages.forEach(function(img) {
+      nivo.append(img)
+    })
+    nivo.nivoSlider({
+        animSpeed : 300
+      , pauseTime : getTempo()
+    })
+    nivo.on('click', function() {
       headerDiv.toggle()
     })
-    clearInterval(intervalId)
-    intervalId = setInterval(function() {
-      var img = allImages.shift()
-      imageResults.empty()
-      imageResults.append(img)
-    }, getTempo())
+    //imageResults.on('click', function() {
+    //  headerDiv.toggle()
+    //})
+    //clearInterval(intervalId)
+    //intervalId = setInterval(function() {
+    //  var img = allImages.shift()
+    //  imageResults.empty()
+    //  imageResults.append(img)
+    //}, getTempo())
   }
 
   function setfocus() {
