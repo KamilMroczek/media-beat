@@ -1,7 +1,10 @@
 
 R.ready(function() {
   console.log('rdio is ready')
-  if (!R.authenticated()) R.authenticate()
+  if (!R.authenticated()){
+    console.log('attempting to authenticate rdio')
+    R.authenticate()
+  }
 })
 
 function makeReq(sQuery) {
