@@ -27,9 +27,9 @@ $(document).ready(function () { R.ready(function() {
         //imageResults.append(imgHtml)
         allImages.push(img)
       })
+      animateThroughImages()
+      toggleHeaderOff()
     })
-    toggleHeaderOff()
-    animateThroughImages()
   }
 
   R.player.on('change:playingSource', function() {
@@ -112,10 +112,10 @@ $(document).ready(function () { R.ready(function() {
     }, 4000)
   }
   function toggleHeaderOff() {
-    if (headerDiv.is(':visible')) headerDiv.toggle()
+    //if (headerDiv.is(':visible') && allImages.length) headerDiv.toggle()
   }
   function toggleHeaderOn() {
-    if (!headerDiv.is(':visible')) headerDiv.toggle()
+    //if (!headerDiv.is(':visible')) headerDiv.toggle()
   }
 
   function setfocus() {

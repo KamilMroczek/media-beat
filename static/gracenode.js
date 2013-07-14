@@ -4,6 +4,7 @@ var getTrackMood = function(cb) {
   var url = "http://mhd.gracenote.io";
   url += "/artist/" + encodeURIComponent(getCurrentArtist());
   url += "/track/" + encodeURIComponent(getCurrentTrackName());
+  //url = url.replace(/\(/g, "%28").replace(/\)/g, "%29");
 
   $.ajax({
       url: url,
