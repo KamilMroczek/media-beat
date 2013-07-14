@@ -1,17 +1,17 @@
-var tempoTiming = 1000;
+var tempoTiming = 4000;
 
 var getTrackMood = function(cb) {
   var url = "http://mhd.gracenote.io";
   url += "/artist/" + encodeURIComponent(getCurrentArtist());
   url += "/track/" + encodeURIComponent(getCurrentTrackName());
-  
+
   $.ajax({
       url: url,
       dataType: 'jsonp',
       success: function(results){
         trackData = extractRelevantTrackData(results);
         tempoTiming = getTempoTiming(trackData["tempo"])
-        cb({"mood": trackData["mood"], "tempo": tempo})
+        cb({"mood": trackData["mood"], "tempo": tempoTiming})
       }
   });
 };
@@ -36,7 +36,7 @@ extractRelevantTrackData = function(results) {
   } else {
     alert("results is null!");
   }
-  
+
   return trackData;
 };
 
