@@ -16,12 +16,22 @@ server.get('/', function(req, res){
 })
 
 server.get('/images/:artist/:mood', function (req, res) {
-  console.log('getting images for artist: %s \tmood:', req.params.artist, req.params.mood )
+  console.log('getting images for artist: %s \tmood: %s', req.params.artist, req.params.mood )
   bing(req.params.artist, function(artistArray) {
     bing(req.params.mood, function(moodArray) {
       res.setHeader('Content-Type', 'application/json')
       console.log('returning images')
-      res.end(JSON.stringify({images : JSON.stringify(artistArray.concat(moodArray))}))
+      var allImages = artistArray.concat(moodArray)
+      var randomImages = []
+      while(artistArray.length > 0 || moodArray.length > 0) {
+        if(artistArray.length > 0) {
+          randomImages.push(artistArray.shift())
+        }
+        if(moodArray.length > 0) {
+          randomImages.push(moodArray.shift())
+        }
+      }
+      res.end(JSON.stringify({images : JSON.stringify(randomImages)}))
     })
   })
 })
