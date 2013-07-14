@@ -20,7 +20,7 @@ $(document).ready(function () { R.ready(function() {
       imageResults.empty()
       images.forEach(function(img) {
         var imgHtml = $('<img src="'+img.url+'" height="'+img.height+'" width="'+img.width+'"></img>')
-        imageResults.prepend(imgHtml)
+        imageResults.append(imgHtml)
       })
     })
   }
