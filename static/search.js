@@ -17,6 +17,7 @@ $(document).ready(function () { R.ready(function() {
   function loadImages() {
     //taher, here is the image API. `getImages` is a global function
     getImages(getCurrentArtist(), function(images) {
+      imageResults.empty()
       images.forEach(function(img) {
         var imgHtml = $('<img src="'+img.url+'" height="'+img.height+'" width="'+img.width+'"></img>')
         imageResults.prepend(imgHtml)
