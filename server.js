@@ -12,7 +12,7 @@ server.get('static/:filename', function (req, res) {
 })
 
 server.get('/', function(req, res){
-  filed(path.join(__dirname, '/static/home.html')).pipe(res)
+  filed(path.join(__dirname, '/static/index.html')).pipe(res)
 })
 
 server.get('/images/:artist/:mood', function (req, res) {

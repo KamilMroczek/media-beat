@@ -15,15 +15,17 @@ function makeReq(sQuery) {
   return req
 }
 
-function rdioRealtimeSearch(txt, cb) {
+function rdioRealtimeSearch(txtObj, cb) {
+  if (!txtObj || !txtObj.term) return
+
   function handleSuccess(res) {
     var results = res.result
       , ret = []
     results.forEach(function(itm) {
       var obj = {
-        name : itm.name
+        label : itm.name
       }
-      obj.play = function() {
+      obj.value = function() {
         R.player.play({source : itm.key})
       }
       ret.push(obj)
@@ -31,7 +33,7 @@ function rdioRealtimeSearch(txt, cb) {
     cb(ret)
   }
 
-  var req = makeReq(txt)
+  var req = makeReq(txtObj.term)
   req.method = 'searchSuggestions'
   req.success = handleSuccess
   R.request(req)

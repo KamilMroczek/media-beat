@@ -79,5 +79,37 @@ $(document).ready(function () { R.ready(function() {
     var artist = R.player.playingTrack().get('albumArtist')
     return artist
   }
+
+  //autocomplete
+  $( "#project" ).autocomplete({
+    minLength: 0,
+    source: rdioRealtimeSearch,
+    focus: function( event, ui ) {
+      $( "#project" ).val( ui.item.label );
+      return false;
+    },
+    select: function( event, ui ) {
+      ui.item.value()
+      //$( "#project" ).val( ui.item.label );
+      //$( "#project-id" ).val( ui.item.theartist );
+      //$( "#project-description" ).html( ui.item.desc );
+
+      return false;
+    }
+  })
+  .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+    var li = $( '<li>'+item.label+'</li>' )
+    li.on('click', item.value)
+    li.css('cursor', 'pointer')
+
+    return li.appendTo( ul );
+  }
+
+  function setfocus() {
+    setTimeout(function(){window.scrollTo(0, 1)},100);
+    setTimeout(function(){document.getElementById("project").focus()},200);
+  }
+  setfocus()
+
 })})
 
