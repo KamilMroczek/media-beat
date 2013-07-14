@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Visual Music</title>
+  <title>Visual Groove</title>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
   <script src="https://www.rdio.com/api/api.js?helper=/static/helper.html&client_id=Jg1nrhI1IFnAQj1dWDaLfw"></script>
@@ -14,7 +14,7 @@
   <script src="/static/gracenode.js"></script>
   <script src="/static/jquery.nivo.slider.pack.js"></script>
   <script src="/static/search.js"></script>
-  <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
   <!--
   <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css" />
   -->
@@ -61,79 +61,112 @@ font-size:14px;
     font-size:20px;
     padding:8px;
 
-	font-size:16px;font-weight:normal;font-family:arial;
-	background-color:black;
+	font-size:18px;font-weight:normal;font-family:arial;
+	background-color:white
+
 }
 
   input:focus {
     outline:none;
     border-color:#9ecaed;
-	border-color:lightgreen;
+	border-color:white;
     box-shadow:0 0 10px #9ecaed;
-	font-size:20px;
+	font-size:18px;
 
 }
 
-#outerdiv
-{
-width:1200px;
-height:800px;
-overflow:hidden;
-position:relative;
-}
 
-#inneriframe
-{
-position:absolute;
-left:-100px;
-top:-200px;
-width:1700px;
-height:700px;
+html {
+    background:url('bg-lighter.png') center center no-repeat;
+	background-color:black;
+    width:100%;
+    height:100%;
 }
 
 
-.nivoSlider {
-  position:relative;
-  background:url(images/loading.gif) no-repeat 50% 50%;
-}
-.nivoSlider img {
-  position:absolute;
-  top:0px;
-  left:0px;
-  display:none;
-}
-.nivoSlider a {
-  border:0;
-  display:block;
-}
-</style>
+
+  </style>
 
 
-<script>
+
+
+  <script>
+  $(function() {
+    var projects = [
+      {
+        theartist: "2Pac",
+        label: "California Love",
+        desc: "California Love",
+        spotify_song_id: "1TdfRFmp4z1h2ecflxCaV3"
+      },
+      {
+        theartist: "Whitney Houston",
+        label: "I Will Always Love You",
+        desc: "I Will Always Love You",
+        spotify_song_id: "1cJssTcMltUxhvUZLpn3Ci"
+      },
+      {
+        theartist: "Eagles",
+        label: "Hotel California",
+        desc: "Hotel California",
+        spotify_song_id: "4Vn7TykT27PIygBiZjTR2s"
+      }
+    ];
+
+    $( "#project" ).autocomplete({
+      minLength: 0,
+      source: projects,
+      focus: function( event, ui ) {
+        $( "#project" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#project" ).val( ui.item.label );
+        $( "#project-id" ).val( ui.item.theartist );
+        $( "#project-description" ).html( ui.item.desc );
+
+        return false;
+      }
+    })
+    .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      return $( '<li>' )
+
+        .append( '<a target="_blank" href="https://play.spotify.com/track/' + item.spotify_song_id+'">'+item.theartist+':'+item.label + '</a>' )
+        .appendTo( ul );
+    };
+  });
+  </script>
+
+<script type="text/javascript">
+function setfocus() {
+setTimeout(function(){window.scrollTo(0, 1)},100);
+setTimeout(function(){document.getElementById("project").focus()},200);
+}
 </script>
+
+
 
 </head>
 
 
-<body style="font-family:Electrolize;background-color:black;margin:0;padding:0;">
-<div style="font-size:13px;font-weight:bold;color:lightgray;background:lightgreen;width:100%;height:4px;font-family:arial;padding:0;padding-top:5px;padding-bottom:0px;margin:0;margin:0;">
+<body style="font-family:Oswald;background-color:black;margin:0;padding:0;" onLoad="setfocus();">
+
+
+<div style="font-size:13px;font-weight:bold;color:lightgray;background:black;width:100%;height:30px;font-family:arial;padding:0;padding-top:0px;padding-bottom:0px;margin:0;margin:0;">
+
 
 <div id="header_div">
-  <div id="project-label" style="width:100%;text-align:center;margin-top:10px;font-size:28px;font-weight:normal;letter-spacing:0px;">
-    <span style="font-family:Electrolize;color:lightgreen;">Visual Music</span><br>
-    <h1 id="play_pause" style="cursor:pointer;"></h1>
-    <input id="project" style="width:98%;margin-left:0px;margin-top:10px;font-family:Electrolize;color:white;"/>
-    <input type="hidden" id="project-id" style="padding:0;margin:0;" />
+  <div id="project-label" style="width:100%;text-align:center;margin-top:20%;font-size:60px;font-weight:normal;letter-spacing:0px;">
+  <span style="font-family:Oswald;color:white;">Visual Groove</span><br>
+  <span id="play_pause" style="font-family:Oswald;color:white;cursor:pointer;">:::</span><br>
+  <input id="project" placeholder="enter music: e.g., California Love " style="width:30%;margin-left:0px;margin-top:10px;font-family:Oswald;color:black;text-align:left;"/>
+  <input type="hidden" id="project-id" style="padding:0;margin:0;" />
   </div>
 </div>
 <div id="image_results" style="display:block;margin-top:10px;width:98%;margin-left:auto;margin-right:auto;float:center;"></div>
+
+
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
