@@ -18,7 +18,7 @@ $(document).ready(function () { R.ready(function() {
 
   function loadImages() {
     //taher, here is the image API. `getImages` is a global function
-    getImages(getCurrentArtist(), function(images) {
+    getImages(getCurrentArtist(), getCurrentTrackName(), function(images) {
       imageResults.empty()
       allImages = []
       images.forEach(function(img) {
