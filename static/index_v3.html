@@ -1,0 +1,161 @@
+﻿<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Visual Music</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <!--
+  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css" /> 
+  
+  -->
+ 
+ <style>
+  #project-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1em;
+  
+font-family: Arial;
+font-weight: normal;
+  
+  }
+  #project-spotify_song_id {
+  /*  float: left;
+    height: 32px;
+    width: 32px; */
+	display:none;
+  }
+  #project-description {
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  .ui-menu .ui-menu-item a {
+text-decoration: none;
+display: block;
+padding: 2px .4em;
+line-height: 1.5;
+min-height: 0;
+font-weight: normal;
+
+font-family:arial;
+font-size:14px;
+}
+  
+  
+  input {
+    
+    border:2px solid #dadada;
+    border-radius:7px;
+    font-size:20px;
+    padding:8px;
+
+	font-size:18px;font-weight:normal;font-family:arial;
+	background-color:white
+	
+}
+  
+  input:focus { 
+    outline:none;
+    border-color:#9ecaed;
+	border-color:white;
+    box-shadow:0 0 10px #9ecaed;
+	font-size:18px;
+	
+}
+  
+ 
+html {
+    background:url('bg-lighter.png') center center no-repeat;
+	background-color:black;
+    width:100%;
+    height:100%;   
+}
+    
+
+
+  </style>
+
+
+  
+  
+  <script>
+  $(function() {
+    var projects = [
+      {
+        theartist: "2Pac",
+        label: "California Love",
+        desc: "California Love",
+        spotify_song_id: "1TdfRFmp4z1h2ecflxCaV3"
+      },
+      {
+        theartist: "Whitney Houston",
+        label: "I Will Always Love You",
+        desc: "I Will Always Love You",
+        spotify_song_id: "1cJssTcMltUxhvUZLpn3Ci"
+      },
+      {
+        theartist: "Eagles",
+        label: "Hotel California",
+        desc: "Hotel California",
+        spotify_song_id: "4Vn7TykT27PIygBiZjTR2s"
+      }
+    ];
+ 
+    $( "#project" ).autocomplete({
+      minLength: 0,
+      source: projects,
+      focus: function( event, ui ) {
+        $( "#project" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#project" ).val( ui.item.label );
+        $( "#project-id" ).val( ui.item.theartist );
+        $( "#project-description" ).html( ui.item.desc );
+ 
+        return false;
+      }
+    })
+    .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      return $( '<li>' )
+	  
+        .append( '<a target="_blank" href="https://play.spotify.com/track/' + item.spotify_song_id+'">'+item.theartist+':'+item.label + '</a>' )
+        .appendTo( ul );
+    };
+  });
+  </script>
+
+<script type="text/javascript">
+function setfocus() {
+setTimeout(function(){window.scrollTo(0, 1)},100);
+setTimeout(function(){document.getElementById("project").focus()},200);
+}
+</script>
+
+  
+  
+</head>
+  
+
+<body style="font-family:Oswald;background-color:black;margin:0;padding:0;" onLoad="setfocus();">
+
+
+<div style="font-size:13px;font-weight:bold;color:lightgray;background:black;width:100%;height:4px;font-family:arial;padding:0;padding-top:0px;padding-bottom:0px;margin:0;margin:0;">
+
+
+<div id="project-label" style="width:100%;text-align:center;margin-top:20%;font-size:60px;font-weight:normal;letter-spacing:0px;">
+<span style="font-family:Oswald;color:white;">Visual Music</span><br>
+<input id="project" placeholder="enter music: e.g., California Love " style="width:30%;margin-left:0px;margin-top:10px;font-family:Oswald;color:black;text-align:left;"/>
+<input type="hidden" id="project-id" style="padding:0;margin:0;" />
+</div>
+
+</div>
+ 
+</body>
+</html>

@@ -28,6 +28,7 @@ $(document).ready(function () { R.ready(function() {
         allImages.push(img)
       })
     })
+    toggleHeaderOff()
     animateThroughImages()
   }
 
@@ -44,9 +45,13 @@ $(document).ready(function () { R.ready(function() {
   })
 
   function updateUI() {
-    var description = ' - ' + getCurrentArtist() + ' - ' + getCurrentTrackName()
-    if (isPaused()) playPause.html('Play' + description)
-    else if (isPlaying()) playPause.html('Pause' + description)
+    var description = ' ::: ' + getCurrentArtist() + ' ::: ' + getCurrentTrackName()
+    if (isPaused()) {
+      playPause.html('Play' + description)
+      toggleHeaderOn()
+    } else if (isPlaying()) {
+      playPause.html('Pause' + description)
+    }
   }
 
   function isPaused() {
@@ -57,8 +62,11 @@ $(document).ready(function () { R.ready(function() {
   }
 
   playPause.on('click', function() {
-    R.player.togglePause()
     updateUI()
+    R.player.togglePause()
+    setTimeout(function(){
+      updateUI()
+    }, 300)
   })
 
 
@@ -95,12 +103,19 @@ $(document).ready(function () { R.ready(function() {
     })
     clearInterval(intervalId)
     intervalId = setInterval(function() {
+      //updateUI()
       var img = allImages.shift()
       img.css('opacity', 0.0)
       imageResults.empty()
       imageResults.append(img)
       img.animate({opacity:1.0, duration:getTempo()})
-    }, 3000)
+    }, 4000)
+  }
+  function toggleHeaderOff() {
+    if (headerDiv.is(':visible')) headerDiv.toggle()
+  }
+  function toggleHeaderOn() {
+    if (!headerDiv.is(':visible')) headerDiv.toggle()
   }
 
   function setfocus() {
