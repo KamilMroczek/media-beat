@@ -15,23 +15,6 @@ function makeReq(sQuery) {
   return req
 }
 
-function rdioSearch (txt, cb) {
-  function handleSuccess(res) {
-    console.log('search response: ' + res)
-    //var album = res.result.results[0]
-    //console.log('playing album: ' + album.name)
-    //R.player.play({source : album.key})
-    cb(res.result.results)
-  }
-
-  var req = makeReq(txt)
-  req.method = 'search'
-  req.success = handleSuccess
-
-  R.request(req)
-}
-window.rdioSearch = rdioSearch
-
 function rdioRealtimeSearch(txt, cb) {
   function handleSuccess(res) {
     var results = res.result
