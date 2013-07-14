@@ -42,8 +42,14 @@ window.rdioRealtimeSearch = rdioRealtimeSearch
 
 function getCurrentArtist() {
   var currentTrack = R.player.playingTrack()
-  if (currentTrack) return currentTrack.get('albumArtist')
-  else return ''
+  if (currentTrack) {
+    console.log("have a track")
+    return currentTrack.get('albumArtist')
+  }
+  else {
+    console.log("dont have a track")
+    return ''
+  }
 }
 window.getCurrentArtist = getCurrentArtist
 
