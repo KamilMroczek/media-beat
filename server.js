@@ -5,7 +5,7 @@ var restify = require('restify')
   , port = 8081
   , bing = require('./bing.js')
 
-bing()
+//bing()
 
 server.get('static/:filename', function (req, res) {
   var filename = path.join(__dirname, 'static',  req.params.filename)
