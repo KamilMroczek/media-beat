@@ -16,9 +16,8 @@ server.get('/', function(req, res){
 })
 
 server.get('/images/:artist/:mood', function (req, res) {
-  console.log('getting images for artist: ' + req.params.artist)
+  console.log('getting images for artist: %s \tmood:', req.params.artist, req.params.mood )
   bing(req.params.artist, function(artistArray) {
-    console.log('getting images for mood: ' + req.params.mood)
     bing(req.params.mood, function(moodArray) {
       res.setHeader('Content-Type', 'application/json')
       console.log('returning images')

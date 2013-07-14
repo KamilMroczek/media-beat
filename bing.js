@@ -11,7 +11,7 @@ var ACCOUNT_KEY = 'SVNIL0U4Y09mM2oyL1l0M2hPeVQxaUFGRXR3bWQ3YnR4THI0SHZhdUwzdzpJU
 module.exports = function(query, cb) {
   var urlObj = url.parse(IMAGE_URL)
   urlObj.query = {
-      Query : "'"+artist+"'"
+      Query : "'"+query+"'"
     , '$format' : 'json'
   }
 
@@ -22,7 +22,7 @@ module.exports = function(query, cb) {
 
   request(options, function(err, res, body) {
     var json = JSON.parse(body)
-    //console.log('bing response: \n\t' + json)
+    console.log('bing response: \n\t' + json)
     handleResults(json, cb)
   })
 }
