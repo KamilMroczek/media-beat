@@ -21,7 +21,7 @@ $(document).ready(function () { R.ready(function() {
     if (txt === previousTxt) return
     resultsDiv.empty()
     previousTxt = txt
-    //taher, here is the realtime API
+    //taher, here is the realtime API. `rdioRealtimeSearch` is a global function
     rdioRealtimeSearch(txt, function(res) {
       res.forEach(function(itm) {
         var div = $('<div style="cursor:pointer;">' + itm.name + '</div>')
@@ -35,7 +35,7 @@ $(document).ready(function () { R.ready(function() {
   }, 200)
 
   function loadImages() {
-    //taher, here is the image API
+    //taher, here is the image API. `getImages` is a global function
     getImages(currentArtist(), function(images) {
       images.forEach(function(img) {
         var imgHtml = $('<img src="'+img.url+'" height="'+img.height+'" width="'+img.width+'"></img>')
@@ -58,10 +58,7 @@ $(document).ready(function () { R.ready(function() {
 	searchForm.on('submit', submitForm);
 
   function updateUI() {
-    var currentlyPlaying = R.player.playingTrack()
-      , description = ''
-    if (currentlyPlaying) description = ' - ' + currentlyPlaying.get('albumArtist') + ' ' + currentlyPlaying.get('name')
-
+    var description = ' - ' + getCurrentArtist() + ' ' + getCurrentTrackName()
     if (isPaused()) playPause.html('Play' + description)
     else if (isPlaying()) playPause.html('Pause' + description)
   }

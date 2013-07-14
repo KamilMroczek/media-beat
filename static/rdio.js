@@ -38,4 +38,18 @@ function rdioRealtimeSearch(txt, cb) {
 }
 window.rdioRealtimeSearch = rdioRealtimeSearch
 
+function getCurrentArtist() {
+  var currentTrack = R.player.playingTrack()
+  if (currentTrack) return currentTrack.get('albumArtist')
+  else return ''
+}
+window.getCurrentArtist = getCurrentArtist
+
+function getCurrentTrackName() {
+  var currentTrack = R.player.playingTrack()
+  if (currentTrack) return currentTrack.get('name')
+  else return ''
+}
+window.getCurrrentTrackName = getCurrentTrackName
+
 
