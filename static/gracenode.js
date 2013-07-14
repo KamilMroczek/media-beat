@@ -1,4 +1,4 @@
-var tempoTiming = 4000;
+var tempoTiming = 400;
 
 var getTrackMood = function(cb) {
   var url = "http://mhd.gracenote.io";

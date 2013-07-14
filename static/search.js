@@ -22,9 +22,10 @@ $(document).ready(function () { R.ready(function() {
       imageResults.empty()
       allImages = []
       images.forEach(function(img) {
-        var imgHtml = $('<img src="'+img.url+'" height="'+img.height+'" width="'+img.width+'" style="display:block;margin-left:auto;margin-right:auto;"></img>')
+        //
+        var img = $('<img src="'+img.url+'" style="display:block;margin-left:auto;margin-right:auto;max-width:100%;height:auto;"' + ' " height="'+img.height+'" width="'+img.width+'" "></img>')
         //imageResults.append(imgHtml)
-        allImages.push(imgHtml)
+        allImages.push(img)
       })
     })
     animateThroughImages()
@@ -43,7 +44,7 @@ $(document).ready(function () { R.ready(function() {
   })
 
   function updateUI() {
-    var description = ' - ' + getCurrentArtist() + ' ' + getCurrentTrackName()
+    var description = ' - ' + getCurrentArtist() + ' - ' + getCurrentTrackName()
     if (isPaused()) playPause.html('Play' + description)
     else if (isPlaying()) playPause.html('Pause' + description)
   }
@@ -89,27 +90,17 @@ $(document).ready(function () { R.ready(function() {
   //animate through images
   var intervalId
   function animateThroughImages() {
-    var nivo = $('#slider')
-    nivo.empty()
-    allImages.forEach(function(img) {
-      nivo.append(img)
-    })
-    nivo.nivoSlider({
-        animSpeed : 300
-      , pauseTime : getTempo()
-    })
-    nivo.on('click', function() {
+    imageResults.on('click', function() {
       headerDiv.toggle()
     })
-    //imageResults.on('click', function() {
-    //  headerDiv.toggle()
-    //})
-    //clearInterval(intervalId)
-    //intervalId = setInterval(function() {
-    //  var img = allImages.shift()
-    //  imageResults.empty()
-    //  imageResults.append(img)
-    //}, getTempo())
+    clearInterval(intervalId)
+    intervalId = setInterval(function() {
+      var img = allImages.shift()
+      img.css('opacity', 0.0)
+      imageResults.empty()
+      imageResults.append(img)
+      img.animate({opacity:1.0, duration:getTempo()})
+    }, 3000)
   }
 
   function setfocus() {
