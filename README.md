@@ -1,7 +1,9 @@
 media-beat
 ==========
 
-Hollywood Hack Day 2013 - Media Beat
+Hollywood Hack Day 2013 - Visual Groove
+
+Winner of Gracenote API Prize
 
 
 https://skydrive.live.com/view.aspx?resid=9C9479871FBFA822!112&app=Word&authkey=!ANNnJQREB0kDC04)
