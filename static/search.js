@@ -77,14 +77,18 @@ $(document).ready(function () { R.ready(function() {
     source: rdioRealtimeSearch,
     focus: function( event, ui ) {
       //$( "#project" ).val( ui.item.label );
-      ui.css('background-color', 'red')
+      //ui.css('background-color', 'red')
     },
     select: function( event, ui ) {
       ui.item.play()
       autocompleteObj('close')
+    },
+    open : function(event) {
+      $('ul.ui-autocomplete').removeAttr('style') //get rid of annoying styling on box
     }
+
   })
-  .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+  .data('ui-autocomplete')._renderItem = function( ul, item ) {
     var li = $( '<li class="list_item"><a>'+item.label+'</a></li>' )
     li.on('click', function() {
       item.play()

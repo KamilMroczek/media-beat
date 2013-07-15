@@ -25,9 +25,8 @@ function rdioRealtimeSearch(txtObj, cb) {
     var results = res.result
       , ret = []
     results.forEach(function(itm) {
-      var obj = {
-        label : itm.name +  ' [' + (itm.type ? itm.type : '') + ']'
-      }
+      var obj = {}
+      obj.label = itm.name +  ' [' + (itm.type ? itm.type : '') + ']'
       obj.play = function() {
         R.player.play({source : itm.key})
       }
