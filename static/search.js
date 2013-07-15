@@ -39,6 +39,7 @@ $(document).ready(function () { R.ready(function() {
   })
 
   R.player.on('change:playingTrack', function() {
+    //allImages = []
     console.log('playing track changed')
     loadImages()
     updateUI()
@@ -102,14 +103,16 @@ $(document).ready(function () { R.ready(function() {
       headerDiv.toggle()
     })
     clearInterval(intervalId)
-    intervalId = setInterval(function() {
+    function animate() {
       //updateUI()
       var img = allImages.shift()
       img.css('opacity', 0.0)
       imageResults.empty()
       imageResults.append(img)
       img.animate({opacity:1.0, duration:getTempo()})
-    }, 4000)
+    }
+    intervalId = setInterval(animate, 4000)
+    animate()
   }
   function toggleHeaderOff() {
     //if (headerDiv.is(':visible') && allImages.length) headerDiv.toggle()
