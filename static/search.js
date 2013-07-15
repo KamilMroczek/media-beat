@@ -12,6 +12,7 @@ $(document).ready(function () { R.ready(function() {
     , headerDiv = $('#header_div')
     , previousTxt = ''
     , allImages = []
+    , autocompleteObj
 
   loadImages()
   updateUI()
@@ -71,42 +72,45 @@ $(document).ready(function () { R.ready(function() {
 
 
   //autocomplete
-  $( "#project" ).autocomplete({
+  autocompleteObj = $("#project").autocomplete({
     minLength: 0,
     source: rdioRealtimeSearch,
     focus: function( event, ui ) {
-      $( "#project" ).val( ui.item.label );
-      return false;
+      //$( "#project" ).val( ui.item.label );
+      ui.css('background-color', 'red')
     },
     select: function( event, ui ) {
       ui.item.play()
-      $('#project').autocomplete('close')
+      autocompleteObj('close')
     }
   })
   .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-    var li = $( '<li>'+item.label+'</li>' )
+    var li = $( '<li class="list_item"><a>'+item.label+'</a></li>' )
     li.on('click', function() {
       item.play()
       toggleHeaderOff()
     })
     li.css('cursor', 'pointer')
-
-    return li.appendTo( ul );
+    ul.append(li)
+    return li
   }
 
   //animate through images
+  var TIMEOUT_ID
   function animateThroughImages() {
     imageResults.on('click', function() {
       toggleHeaderDiv()
     })
+    clearTimeout(TIMEOUT_ID)
     function animate() {
       //updateUI()
       var img = allImages.shift()
       img.css('opacity', 0.0)
       imageResults.empty()
       imageResults.append(img)
-      img.animate({opacity:1.0, duration:getTempoTransitionTime()})
-      setTimeout(animate, getTempoTimeBetweenImages())
+      img.animate({opacity:1.0, duration:getTempoTransitionTime()}, function() {
+        TIMEOUT_ID = setTimeout(animate, getTempoTimeBetweenImages())
+      })
     }
     animate()
   }

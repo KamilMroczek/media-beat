@@ -26,8 +26,8 @@ window.getTempoTransitionTime = function() {
   return transitionTiming
 }
 
-
 function extractRelevantTrackData(results) {
+  //console.log('gracenote results:%s', JSON.stringify(results))
   var trackData = {}
   if(results) {
     if(results["mood"] && results["mood"]["1"]) {
