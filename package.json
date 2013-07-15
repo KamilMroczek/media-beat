@@ -1,5 +1,5 @@
 {
-  "name": "media-beat",
+  "name": "visual-groove",
   "version": "0.0.0-2",
   "description": "hollywood hackathon",
   "main": "server.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KamilMroczek/media-beat.git"
+    "url": "https://github.com/KamilMroczek/visual-groove.git"
   },
   "dependencies": {
     "restify": "*",
@@ -21,7 +21,7 @@
   "readmeFilename": "README.md",
   "gitHead": "2acc554275664803831ea9a46b8fcf60ce962ade",
   "bugs": {
-    "url": "https://github.com/KamilMroczek/media-beat/issues"
+    "url": "https://github.com/KamilMroczek/visual-groove/issues"
   },
   "subdomain": "vizgroove",
   "engines": {
