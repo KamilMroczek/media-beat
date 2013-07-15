@@ -28,7 +28,7 @@ function rdioRealtimeSearch(txtObj, cb) {
       var obj = {
         label : itm.name +  ' [' + (itm.type ? itm.type : '') + ']'
       }
-      obj.value = function() {
+      obj.play = function() {
         R.player.play({source : itm.key})
       }
       ret.push(obj)

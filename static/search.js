@@ -22,13 +22,12 @@ $(document).ready(function () { R.ready(function() {
       imageResults.empty()
       allImages = []
       images.forEach(function(img) {
-        //
-        var img = $('<img src="'+img.url+'" style="display:block;margin-left:auto;margin-right:auto;max-width:100%;height:auto;"' + ' " height="'+img.height+'" width="'+img.width+'" "></img>')
+        img = $('<img src="'+img.url+'" class="displayed_image"' + ' " height="'+img.height+'" width="'+img.width+'" "></img>')
         //imageResults.append(imgHtml)
         allImages.push(img)
       })
-      animateThroughImages()
       toggleHeaderOff()
+      animateThroughImages()
     })
   }
 
@@ -80,45 +79,52 @@ $(document).ready(function () { R.ready(function() {
       return false;
     },
     select: function( event, ui ) {
-      ui.item.value()
-      //$( "#project" ).val( ui.item.label );
-      //$( "#project-id" ).val( ui.item.theartist );
-      //$( "#project-description" ).html( ui.item.desc );
-
-      return false;
+      ui.item.play()
+      $('#project').autocomplete('close')
     }
   })
   .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
     var li = $( '<li>'+item.label+'</li>' )
-    li.on('click', item.value)
+    li.on('click', function() {
+      item.play()
+      toggleHeaderOff()
+    })
     li.css('cursor', 'pointer')
 
     return li.appendTo( ul );
   }
 
   //animate through images
-  var intervalId
   function animateThroughImages() {
     imageResults.on('click', function() {
-      headerDiv.toggle()
+      toggleHeaderDiv()
     })
-    clearInterval(intervalId)
     function animate() {
       //updateUI()
       var img = allImages.shift()
       img.css('opacity', 0.0)
       imageResults.empty()
       imageResults.append(img)
-      img.animate({opacity:1.0, duration:getTempo()})
+      img.animate({opacity:1.0, duration:getTempoTransitionTime()})
+      setTimeout(animate, getTempoTimeBetweenImages())
     }
-    intervalId = setInterval(animate, 4000)
     animate()
   }
+
   function toggleHeaderOff() {
-    //if (headerDiv.is(':visible') && allImages.length) headerDiv.toggle()
+    var opacity = parseInt(headerDiv.css('opacity'), 10)
+    if (opacity > 0) headerDiv.animate({opacity : 0.0}, 350)
   }
   function toggleHeaderOn() {
     //if (!headerDiv.is(':visible')) headerDiv.toggle()
+  }
+
+  function toggleHeaderDiv() {
+    var opacity = parseInt(headerDiv.css('opacity'), 10)
+      , newOp
+    if (opacity > 0) newOp = 0.0
+    else newOp = 1.0
+    headerDiv.animate({opacity : newOp}, 350)
   }
 
   function setfocus() {

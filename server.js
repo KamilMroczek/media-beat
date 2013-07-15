@@ -1,13 +1,24 @@
+
 var restify = require('restify')
   , server = restify.createServer()
   , path = require('path')
   , filed = require('filed')
-  , port = 8081
+  , PORT = 8081
   , bing = require('./bing.js')
   , lyrics = require('./lyrics.js')
+  , STATIC_PATH = path.join(__dirname, 'static')
 
 server.get('static/:filename', function (req, res) {
-  var filename = path.join(__dirname, 'static',  req.params.filename)
+
+  var filename = req.params.filename
+    , filePath = path.join(STATIC_PATH, filename)
+
+  if (filename.slice(0, STATIC_PATH.length) !== filename) { //basically, filepath contained ../
+    res.statusCode = 403
+    res.end('hmmmmmmmmmmmmm')
+    return
+  }
+
   console.log('serving filename: ' + filename)
   filed(filename).pipe(res)
 })
@@ -42,11 +53,11 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
           i++;
         }
         res.end(JSON.stringify({images : JSON.stringify(randomImages)}))
-      })  
+      })
     })
   })
 })
 
-server.listen(8081, function() {
+server.listen(PORT, function() {
   console.log('%s listening at %s', server.name, server.url);
 })

@@ -1,6 +1,6 @@
 {
   "name": "media-beat",
-  "version": "0.0.0",
+  "version": "0.0.0-2",
   "description": "hollywood hackathon",
   "main": "server.js",
   "scripts": {
@@ -11,10 +11,10 @@
     "type": "git",
     "url": "https://github.com/KamilMroczek/media-beat.git"
   },
-  "dependencies" : {
-    "restify":"*",
-    "filed":"*",
-    "request":"*"
+  "dependencies": {
+    "restify": "*",
+    "filed": "*",
+    "request": "*"
   },
   "author": "",
   "license": "BSD",
@@ -22,5 +22,9 @@
   "gitHead": "2acc554275664803831ea9a46b8fcf60ce962ade",
   "bugs": {
     "url": "https://github.com/KamilMroczek/media-beat/issues"
+  },
+  "subdomain": "vizgroove",
+  "engines": {
+    "node": "0.8.x"
   }
 }

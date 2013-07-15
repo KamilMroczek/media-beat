@@ -1,27 +1,33 @@
-var tempoTiming = 400;
+var tempoTiming = 3000
+  , transitionTiming = 350
 
 var getTrackMood = function(cb) {
   var url = "http://mhd.gracenote.io";
   url += "/artist/" + encodeURIComponent(getCurrentArtist());
   url += "/track/" + encodeURIComponent(getCurrentTrackName());
-  //url = url.replace(/\(/g, "%28").replace(/\)/g, "%29");
 
   $.ajax({
       url: url,
       dataType: 'jsonp',
       success: function(results){
-        trackData = extractRelevantTrackData(results);
+        var trackData = extractRelevantTrackData(results);
         tempoTiming = getTempoTiming(trackData["tempo"])
+        transitionTiming = getTempoTransitionTime()
+        console.log('gracenode -> time-between-photos: %s  transition-time: %s', tempoTiming, transitionTiming)
         cb({"mood": trackData["mood"], "tempo": tempoTiming})
       }
   });
 };
 
-window.getTempo = function() {
+window.getTempoTimeBetweenImages = function() {
   return tempoTiming;
 }
+window.getTempoTransitionTime = function() {
+  return transitionTiming
+}
 
-extractRelevantTrackData = function(results) {
+
+function extractRelevantTrackData(results) {
   var trackData = {}
   if(results) {
     if(results["mood"] && results["mood"]["1"]) {
@@ -41,14 +47,26 @@ extractRelevantTrackData = function(results) {
   return trackData;
 };
 
-getTempoTiming = function(tempo) {
+function getTempoTiming(tempo) {
   if(tempo == "Slow Tempo") {
-    return 3000;
+    return 6000;
   } else if(tempo == "Medium Tempo") {
-    return 1500;
+    return 3000;
   } else if(tempo == "Fast Tempo") {
-    return 750;
+    return 1800;
   } else {
-    return 1000;
+    return 3000;
   }
 }
+function getTempoTransitionTime(tempo) {
+  if(tempo == "Slow Tempo") {
+    return 700;
+  } else if(tempo == "Medium Tempo") {
+    return 350;
+  } else if(tempo == "Fast Tempo") {
+    return 150;
+  } else {
+    return 350;
+  }
+}
+
