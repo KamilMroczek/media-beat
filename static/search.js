@@ -49,7 +49,6 @@ $(document).ready(function () { R.ready(function() {
     var description = ' ::: ' + getCurrentArtist() + ' ::: ' + getCurrentTrackName()
     if (isPaused()) {
       playPause.html('Play' + description)
-      toggleHeaderOn()
     } else if (isPlaying()) {
       playPause.html('Pause' + description)
     }
@@ -104,6 +103,10 @@ $(document).ready(function () { R.ready(function() {
   imageResults.on('click', function() {
     toggleHeaderDiv()
   })
+  $('body').on('click', function() {
+    var opacity = parseInt(headerDiv.css('opacity'), 10)
+    if (opacity === 0) toggleHeaderDiv()
+  })
   function animateThroughImages() {
     clearTimeout(TIMEOUT_ID)
     function animate() {
@@ -122,9 +125,6 @@ $(document).ready(function () { R.ready(function() {
   function toggleHeaderOff() {
     var opacity = parseInt(headerDiv.css('opacity'), 10)
     if (opacity > 0) headerDiv.animate({opacity : 0.0}, 350)
-  }
-  function toggleHeaderOn() {
-    //if (!headerDiv.is(':visible')) headerDiv.toggle()
   }
 
   function toggleHeaderDiv() {
