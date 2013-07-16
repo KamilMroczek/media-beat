@@ -25,6 +25,7 @@
   },
   "subdomain": "vizgroove",
   "engines": {
-    "node": "0.8.x"
+    "node" : "0.10.x",
+    "npm" : "1.3.x"
   }
 }
