@@ -1,4 +1,3 @@
-
 var restify = require('restify')
   , server = restify.createServer()
   , path = require('path')
