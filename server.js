@@ -1,3 +1,4 @@
+
 var restify = require('restify')
   , server = restify.createServer()
   , path = require('path')
@@ -14,7 +15,7 @@ server.get('static/:filename', function (req, res) {
 
   if (filename.slice(0, STATIC_PATH.length) !== filename) { //basically, filepath contained ../
     res.statusCode = 403
-    res.end('hmmmmmmmmmmmmm')
+    res.end('hmmmmmmmmmmmmmmmm')
     return
   }
 
