@@ -6,7 +6,11 @@ var restify = require('restify')
   , PORT = process.env.PORT || 8081
   , bing = require('./bing.js')
   , lyrics = require('./lyrics.js')
-  , STATIC_PATH = path.join(process.env.PATH || __dirname, 'static')
+  , STATIC_PATH = path.join(process.cwd(), 'static')
+
+//console.log('cwd: %s', process.cwd())
+//console.log('__dirname: %s', __dirname)
+console.log('static path: %s', STATIC_PATH)
 
 server.get('static/:filename', function (req, res) {
 
@@ -19,12 +23,12 @@ server.get('static/:filename', function (req, res) {
   //  return
   //}
 
-  console.log('serving filename: ' + filename)
-  filed(filename).pipe(res)
+  console.log('serving file: ' + filePath)
+  filed(filePath).pipe(res)
 })
 
 server.get('/', function(req, res){
-  filed(path.join(__dirname, '/static/index.html')).pipe(res)
+  filed(path.join(process.cwd(), '/static/index.html')).pipe(res)
 })
 
 server.get('/images/:artist/:mood/:track', function (req, res) {
