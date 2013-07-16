@@ -13,11 +13,11 @@ server.get('static/:filename', function (req, res) {
   var filename = req.params.filename
     , filePath = path.join(STATIC_PATH, filename)
 
-  if (filename.slice(0, STATIC_PATH.length) !== filename) { //basically, filepath contained ../
-    res.statusCode = 403
-    res.end('hmmmmmmmmmmmmmmmmmmm')
-    return
-  }
+  //if (filename.slice(0, STATIC_PATH.length) !== filename) { //basically, filepath contained ../
+  //  res.statusCode = 403
+  //  res.end('hmmmmmmmmmmmmmmmmmmm')
+  //  return
+  //}
 
   console.log('serving filename: ' + filename)
   filed(filename).pipe(res)
