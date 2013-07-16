@@ -30,7 +30,6 @@
         padding:0;
       }
       #project-label {
-        display: block;
         font-weight: bold;
         margin-bottom: 1em;
         font-family: Arial;
@@ -47,9 +46,6 @@
         border-radius:7px;
         font-size:20px;
         padding:8px;
-
-        /*font-size:18px;font-weight:normal;font-family:arial;*/
-        /*background-color:white*/
         background-color:#f4f2f2;
       }
 
@@ -61,16 +57,6 @@
         height:100%;
       }
 
-      #project-label
-      {
-        width:100%;
-        text-align:center;
-        margin-top:20%;
-        margin-bottom:0;
-        font-size:60px;
-        font-weight:normal;
-        letter-spacing:0px;
-      }
       #image_results
       {
         z-index:-1;
@@ -85,6 +71,7 @@
 
       .displayed_image
       {
+        z-index:-1;
         position: absolute;
         margin: auto;
         top: 0;
@@ -100,7 +87,6 @@
       input:focus {
         outline:none;
         border-color:#9ecaed;
-        border-color:white;
         box-shadow:0 0 10px #9ecaed;
         font-size:18px;
         margin-bottom:0;
@@ -109,13 +95,24 @@
       {
         position:relative;
         z-index:1;
-        /*display:block;*/
-        display:inline;
+        display:block;
         height:98%;
-        margin-top:auto;
+        margin-top:15%;
         margin-bottom:0;
         font-size:13px;
         font-weight:bold;
+
+        text-align:center;
+        font-weight:normal;
+        letter-spacing:0px;
+      }
+      #play_pause
+      {
+        font-family:'Oswald';
+        color:white;
+        cursor:pointer;
+        color:#f4f2f2;
+        font-weight:300;
       }
       #project
       {
@@ -130,7 +127,6 @@
         color:black;
         text-align:left;
       }
-
 
       .list_item
       {
@@ -174,12 +170,9 @@
 
   <body style="">
     <div id="header_div">
-      <div id="project-label" style="">
-        <!--<span style="font-family:Oswald;color:white;">Visual Groove</span><br>-->
-        <img src="/static/logo4.png" style="display:block;margin-left:auto;margin-right:auto;"></img>
-        <span id="play_pause" style="font-family:'Oswald';font-size:60%;color:white;cursor:pointer;font-weight:300;">:::</span><br>
-        <input id="project" placeholder="enter music: e.g., California Love " style=""/>
-      </div>
+      <img src="/static/logo4.png" style="display:block;margin-left:auto;margin-right:auto;" />
+      <h1 id="play_pause" style="">:::</h1>
+      <input id="project" placeholder="enter music: e.g., California Love " style=""/>
     </div>
 
     <div id="image_results">

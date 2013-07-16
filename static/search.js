@@ -101,10 +101,10 @@ $(document).ready(function () { R.ready(function() {
 
   //animate through images
   var TIMEOUT_ID
+  imageResults.on('click', function() {
+    toggleHeaderDiv()
+  })
   function animateThroughImages() {
-    imageResults.on('click', function() {
-      toggleHeaderDiv()
-    })
     clearTimeout(TIMEOUT_ID)
     function animate() {
       //updateUI()
