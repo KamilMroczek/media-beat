@@ -6,7 +6,7 @@ var restify = require('restify')
   , PORT = process.env.PORT || 8081
   , bing = require('./bing.js')
   , lyrics = require('./lyrics.js')
-  , STATIC_PATH = path.join(__dirname, 'static')
+  , STATIC_PATH = path.join(process.env.PATH || __dirname, 'static')
 
 server.get('static/:filename', function (req, res) {
 
