@@ -103,7 +103,7 @@ $(document).ready(function () { R.ready(function() {
   imageResults.on('click', function() {
     toggleHeaderDiv()
   })
-  $('body').on('click', function() {
+  $(document).on('click', function() {
     var opacity = parseInt(headerDiv.css('opacity'), 10)
     if (opacity === 0) toggleHeaderDiv()
   })
@@ -127,12 +127,17 @@ $(document).ready(function () { R.ready(function() {
     if (opacity > 0) headerDiv.animate({opacity : 0.0}, 350)
   }
 
+  var amAnimating = false
   function toggleHeaderDiv() {
+    if (amAnimating) return
+    amAnimating = true
     var opacity = parseInt(headerDiv.css('opacity'), 10)
       , newOp
     if (opacity > 0) newOp = 0.0
     else newOp = 1.0
-    headerDiv.animate({opacity : newOp}, 350)
+    headerDiv.animate({opacity : newOp}, 350, function() {
+      amAnimating = false
+    })
   }
 
   function setfocus() {
