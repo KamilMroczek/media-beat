@@ -15,7 +15,7 @@ server.get('static/:filename', function (req, res) {
 
   if (filename.slice(0, STATIC_PATH.length) !== filename) { //basically, filepath contained ../
     res.statusCode = 403
-    res.end('hmmmmmmmmmmmmmmmm')
+    res.end('hmmmmmmmmmmmmmmmmmmm')
     return
   }
 
