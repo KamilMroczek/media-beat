@@ -5,10 +5,10 @@ window.getImages = function(artist, track, cb) {
     console.log('tempo =' + ret["tempo"])
     var url = '/images/'+encodeURIComponent(artist)+'/'+encodeURIComponent(ret["mood"])+'/'+encodeURIComponent(track)
     url = url.replace(/\(/g, "").replace(/\)/g, "");
-    $.getJSON(url, function (data, status) {
+    $.getJSON(url, function (resJson, status) {
       console.log('recieved images')
-      var images = JSON.parse(data.images)
-      cb(JSON.parse(data.images))
+      var images = resJson.images
+      cb(images)
       //console.log(images)
     })
   })
