@@ -198,7 +198,7 @@ $(document).ready(function () { R.ready(function() {
 
   function setfocus() {
     setTimeout(function(){window.scrollTo(0, 1)},100);
-    setTimeout(function(){document.getElementById("project").focus()},200);
+    setTimeout(function(){document.getElementById("search_bar").focus()},200);
   }
   setfocus()
 
