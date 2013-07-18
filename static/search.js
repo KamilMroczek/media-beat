@@ -31,6 +31,8 @@ $(document).ready(function () { R.ready(function() {
       })
       toggleHeaderOff()
       resumeSlideshow()
+      if (isPaused()) pauseSlideshow() //only show first image if paused
+
     })
   }
 
