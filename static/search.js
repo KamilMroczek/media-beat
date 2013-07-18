@@ -28,7 +28,7 @@ $(document).ready(function () { R.ready(function() {
         allImages.push(img)
       })
       toggleHeaderOff()
-      animateThroughImages()
+      resumeSlideshow()
     })
   }
 
@@ -43,6 +43,15 @@ $(document).ready(function () { R.ready(function() {
     console.log('playing track changed')
     loadImages()
     updateUI()
+  })
+
+  R.player.on('change:playState', function() {
+    updateUI()
+    if (isPaused()) {
+      pauseSlideshow()
+    } else if (isPlaying()) {
+      resumeSlideshow()
+    }
   })
 
   function updateUI() {
@@ -62,11 +71,7 @@ $(document).ready(function () { R.ready(function() {
   }
 
   playPause.on('click', function() {
-    updateUI()
     R.player.togglePause()
-    setTimeout(function(){
-      updateUI()
-    }, 300)
   })
 
 
@@ -98,8 +103,6 @@ $(document).ready(function () { R.ready(function() {
     return li
   }
 
-  //animate through images
-  var TIMEOUT_ID
   imageResults.on('click', function() {
     toggleHeaderDiv()
   })
@@ -107,19 +110,33 @@ $(document).ready(function () { R.ready(function() {
     var opacity = parseInt(headerDiv.css('opacity'), 10)
     if (opacity === 0) toggleHeaderDiv()
   })
-  function animateThroughImages() {
+
+  //animate through images
+  var TIMEOUT_ID
+  function resumeSlideshow() {
     clearTimeout(TIMEOUT_ID)
     function animate() {
       //updateUI()
       var img = allImages.shift()
-      img.css('opacity', 0.0)
-      imageResults.empty()
-      imageResults.append(img)
-      img.animate({opacity:1.0, duration:getTempoTransitionTime()}, function() {
-        TIMEOUT_ID = setTimeout(animate, getTempoTimeBetweenImages())
+        , transitionTime = getTempoTransitionTime()
+      //img.css('opacity', 0.0)
+      //imageResults.empty()
+      //imageResults.append(img)
+      imageResults.animate({opacity:0.0, duration:transitionTime}, function() {
+        imageResults.empty()
+        imageResults.append(img)
+        imageResults.animate({opacity:1.0, duration:transitionTime})
       })
+      TIMEOUT_ID = setTimeout(animate, getTempoTimeBetweenImages() + transitionTime*2.0)
     }
     animate()
+  }
+
+  function pauseSlideshow() {
+    clearTimeout(TIMEOUT_ID)
+    toggleHeaderOn()
+    var opacity = parseInt(imageResults.css('opacity'), 10)
+    if (opacity < 1) imageResults.animate({opacity : 1.0}, 350) //show whatever image there is
   }
 
   function toggleHeaderOff() {
@@ -127,18 +144,25 @@ $(document).ready(function () { R.ready(function() {
     if (opacity > 0) headerDiv.animate({opacity : 0.0}, 350)
   }
 
-  var amAnimating = false
-  function toggleHeaderDiv() {
-    if (amAnimating) return
-    amAnimating = true
+  function toggleHeaderOn() {
     var opacity = parseInt(headerDiv.css('opacity'), 10)
-      , newOp
-    if (opacity > 0) newOp = 0.0
-    else newOp = 1.0
-    headerDiv.animate({opacity : newOp}, 350, function() {
-      amAnimating = false
-    })
+    if (opacity < 1) headerDiv.animate({opacity : 1.0}, 350)
   }
+
+  var toggleHeaderDiv = (function() {
+    var amAnimating = false
+    return function () {
+      if (amAnimating) return
+      amAnimating = true
+      var opacity = parseInt(headerDiv.css('opacity'), 10)
+        , newOp
+      if (opacity > 0) newOp = 0.0
+      else newOp = 1.0
+      headerDiv.animate({opacity : newOp}, 350, function() {
+        amAnimating = false
+      })
+    }
+  })()
 
   function setfocus() {
     setTimeout(function(){window.scrollTo(0, 1)},100);
