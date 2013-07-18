@@ -75,7 +75,7 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
       }
       if(moodArray.length > 0) {
         var url = moodArray.shift()
-        if(i < 1 || (i % 4) === 0) {
+        if(i < 1 || (i % 5) === 0) {
           randomImages.push(url)
         }
       }
