@@ -5,7 +5,7 @@ var url = require('url')
 
 //encoded according to base 64 with a colon separating account key twice
 //key: ISH/E8cOf3j2/Yt3hOyT1iAFEtwmd7btxLr4HvauL3w
-var ACCOUNT_KEY = 'SVNIL0U4Y09mM2oyL1l0M2hPeVQxaUFGRXR3bWQ3YnR4THI0SHZhdUwzdzpJU0gvRThjT2YzajIvWXQzaE95VDFpQUZFdHdtZDdidHhMcjRIdmF1TDN3'
+var ACCOUNT_KEY = require('./apikeys.js').bing
   , IMAGE_URL = 'https://api.datamarket.azure.com/Bing/Search/Image'
 
 module.exports = function(query, cb) {
