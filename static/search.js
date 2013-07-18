@@ -25,7 +25,8 @@ $(document).ready(function () { R.ready(function() {
       imageResults.empty()
       allImages = []
       images.forEach(function(img) {
-        img = $('<img src="'+img.url+'" class="displayed_image"' + ' " height="'+img.height+'" width="'+img.width+'" "></img>')
+        //img = $('<img src="'+img.url+'" class="displayed_image"' + ' " height="'+img.height+'" width="'+img.width+'" "></img>')
+        img = $('<img src="'+img.url+'" class="displayed_image"></img>')
         //imageResults.append(imgHtml)
         allImages.push(img)
       })
@@ -151,9 +152,7 @@ $(document).ready(function () { R.ready(function() {
 
     visualGrooveTitle.animate({opacity : newOp}, 350)
     searchBar.animate({opacity : newOp}, 350)
-    headerDiv.animate({bottom : btm}, 350, function() {
-      amAnimating = false
-    })
+    headerDiv.animate({bottom : btm}, 350)
   }
 
   function toggleHeaderOn() {
@@ -164,9 +163,7 @@ $(document).ready(function () { R.ready(function() {
 
     visualGrooveTitle.animate({opacity : newOp}, 350)
     searchBar.animate({opacity : newOp}, 350)
-    headerDiv.animate({bottom : btm}, 350, function() {
-      amAnimating = false
-    })
+    headerDiv.animate({bottom : btm}, 350)
   }
 
   var toggleHeaderDiv = (function() {
