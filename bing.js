@@ -23,12 +23,15 @@ module.exports = function(query, cb) {
 
   request(options, function(err, res, body) {
     var json = JSON.parse(body)
-    console.log('bing response: \n\t' + json)
-    handleResults(json, cb)
+    if (err) cb(err)
+    else {
+      console.log('bing response: \n\t' + json)
+      cb(null, formatPictureArray(json))
+    }
   })
 }
 
-function handleResults(json, cb) {
+function formatPictureArray(json) {
   var ret = []
   json.d.results.forEach(function (itm) {
     var obj = {}
@@ -38,5 +41,5 @@ function handleResults(json, cb) {
     ret.push(obj)
   })
   //console.log(ret)
-  cb(ret)
+  return ret
 }
