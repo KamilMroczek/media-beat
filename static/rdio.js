@@ -24,11 +24,11 @@ function createLabel(itm) {
 
   if (t === 't') { //track
     track = itm.name
-    artist = itm.arist
+    artist = itm.artist
     albumOrPlaylist = itm.album
   } else if (t === 'a') { //album
     track = ''
-    artist = itm.arist
+    artist = itm.artist
     albumOrPlaylist = itm.name
   } else if (t === 'p') { //playlist
     track = ''
