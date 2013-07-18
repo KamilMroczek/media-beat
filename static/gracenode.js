@@ -10,7 +10,7 @@ var getTrackMood = function(cb) {
       url: url,
       dataType: 'jsonp',
       success: function(results){
-        var trackData = extractRelevantTrackData(results);
+        var trackData = extractRelevantTrackData(results)
           , tempo = trackData.tempo
         console.log('gracenode tempo -> %s', tempo)
         tempoTiming = getTempoTiming(tempo)
