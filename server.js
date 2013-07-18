@@ -32,7 +32,8 @@ server.get('/', function(req, res){
   filed(path.join(process.cwd(), '/static/index.html')).pipe(res)
 })
 server.get('/flickr/:query', function(req, res) {
-  flickr(req.params.query, function(pics) {
+  flickr(req.params.query, function(e, pics) {
+    if (e) return res.end(e)
     res.setHeader('Content-Type', 'application/json')
     res.end(JSON.stringify({images : pics}))
   })
@@ -40,9 +41,9 @@ server.get('/flickr/:query', function(req, res) {
 
 server.get('/images/:artist/:mood/:track', function (req, res) {
   console.log('getting images for artist: %s \tmood: %s \ttrack: %s', req.params.artist, req.params.mood, req.params.track )
-  bing(req.params.artist, function(artistArray) {
-    bing(req.params.mood, function(moodArray) {
-      bing(req.params.track, function(trackArray) {
+  bing(req.params.artist, function(e, artistArray) {
+    bing(req.params.mood, function(e, moodArray) {
+      bing(req.params.track, function(e, trackArray) {
         res.setHeader('Content-Type', 'application/json')
         console.log('returning images')
         var randomImages = []
