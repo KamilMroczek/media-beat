@@ -10,6 +10,8 @@ $(document).ready(function () { R.ready(function() {
   var playPause = $('#play_pause')
     , imageResults = $('#image_results')
     , headerDiv = $('#header_div')
+    , searchBar = $('#search_bar')
+    , visualGrooveTitle = $('#visual_groove_title')
     , previousTxt = ''
     , allImages = []
     , autocompleteObj
@@ -76,7 +78,7 @@ $(document).ready(function () { R.ready(function() {
 
 
   //autocomplete
-  autocompleteObj = $("#project").autocomplete({
+  autocompleteObj = $("#search_bar").autocomplete({
     minLength: 0,
     source: rdioRealtimeSearch,
     focus: function( event, ui ) {
@@ -155,10 +157,22 @@ $(document).ready(function () { R.ready(function() {
       if (amAnimating) return
       amAnimating = true
       var opacity = parseInt(headerDiv.css('opacity'), 10)
+        , curBtm = parseInt(headerDiv.css('bottom'), 10)
         , newOp
-      if (opacity > 0) newOp = 0.0
-      else newOp = 1.0
-      headerDiv.animate({opacity : newOp}, 350, function() {
+        , btm
+      //if (opacity > 0) {
+      console.log('toggling header div')
+      if (curBtm === 0) {
+        newOp = 0.0
+        btm = '' + playPause.offset().top*0.8 + 'px'
+      } else {
+        newOp = 1.0
+        btm = '0px'
+      }
+
+      $('#visual_groove_title').animate({opacity : newOp}, 350)
+      $('#search_bar').animate({opacity : newOp}, 350)
+      headerDiv.animate({bottom : btm}, 350, function() {
         amAnimating = false
       })
     }
