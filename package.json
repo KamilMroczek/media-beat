@@ -12,9 +12,10 @@
     "url": "https://github.com/KamilMroczek/visual-groove.git"
   },
   "dependencies": {
-    "restify": "*",
-    "filed": "*",
-    "request": "*"
+    "restify" : "*",
+    "filed" : "*",
+    "request" : "*",
+    "async" : "*"
   },
   "author": "",
   "license": "BSD",
