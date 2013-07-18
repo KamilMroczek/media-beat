@@ -17,8 +17,8 @@ function search(txt, cb) {
   }
   request({url : flickrUrl.format(), json : true}, function (err, res, json) {
     console.log('flickr response:\n%s', JSON.stringify(json))
-    var pictures = formatPictureArray(json)
-    cb(pictures)
+    if (err) cb(err)
+    else cb(null, formatPictureArray(json))
   })
 }
 
