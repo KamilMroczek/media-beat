@@ -1,4 +1,0 @@
-
-exports.flickr = '63a33104b5111224fcac43667aca65e8'
-exports.bing = 'SVNIL0U4Y09mM2oyL1l0M2hPeVQxaUFGRXR3bWQ3YnR4THI0SHZhdUwzdzpJU0gvRThjT2YzajIvWXQzaE95VDFpQUZFdHdtZDdidHhMcjRIdmF1TDN3'
-
