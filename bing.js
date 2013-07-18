@@ -35,8 +35,6 @@ function formatPictureArray(json) {
   var ret = []
   json.d.results.forEach(function (itm) {
     var obj = {}
-    obj.height = itm.Height
-    obj.width = itm.Width
     obj.url = itm.MediaUrl
     ret.push(obj)
   })

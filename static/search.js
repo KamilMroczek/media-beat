@@ -25,7 +25,6 @@ $(document).ready(function () { R.ready(function() {
       imageResults.empty()
       allImages = []
       images.forEach(function(img) {
-        //img = $('<img src="'+img.url+'" class="displayed_image"' + ' " height="'+img.height+'" width="'+img.width+'" "></img>')
         img = $('<img src="'+img.url+'" class="displayed_image"></img>')
         //imageResults.append(imgHtml)
         allImages.push(img)
