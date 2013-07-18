@@ -16,7 +16,8 @@ function search(txt, cb) {
   }
   request({url : flickrUrl.format(), json : true}, function (err, res, json) {
     console.log('flickr response:\n%s', JSON.stringify(json))
-    var pictures = formatP
+    var pictures = formatPictureArray(json)
+    cb(pictures)
   })
 }
 
@@ -25,7 +26,9 @@ function formatPictureArray(json) {
   //look at this for reference : http://www.flickr.com/services/api/misc.urls.html
   var ret = []
   json.photos.photo.forEach(function (pic) {
-    var url = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_b.jpg' //b is large size
-    ret.push({url : url})
+    var imgUrl = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_b.jpg' //b is large size
+    ret.push({url : imgUrl})
   })
+
+  return ret
 }

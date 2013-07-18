@@ -5,6 +5,7 @@ var restify = require('restify')
   , filed = require('filed')
   , PORT = process.env.PORT || 8081
   , bing = require('./bing.js')
+  , flickr = require('./flickr.js')
   , lyrics = require('./lyrics.js')
   , STATIC_PATH = path.join(process.cwd(), 'static')
 
@@ -29,6 +30,12 @@ server.get('static/:filename', function (req, res) {
 
 server.get('/', function(req, res){
   filed(path.join(process.cwd(), '/static/index.html')).pipe(res)
+})
+server.get('/flickr/:query', function(req, res) {
+  flickr(req.params.query, function(pics) {
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({images : pics}))
+  })
 })
 
 server.get('/images/:artist/:mood/:track', function (req, res) {
