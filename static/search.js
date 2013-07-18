@@ -142,13 +142,29 @@ $(document).ready(function () { R.ready(function() {
   }
 
   function toggleHeaderOff() {
-    var opacity = parseInt(headerDiv.css('opacity'), 10)
-    if (opacity > 0) headerDiv.animate({opacity : 0.0}, 350)
+    var opacity = parseInt(searchBar.css('opacity'), 10)
+    if (opacity === 0) return
+    var newOp = 0.0
+      , btm = '' + playPause.offset().top*0.8 + 'px'
+
+    visualGrooveTitle.animate({opacity : newOp}, 350)
+    searchBar.animate({opacity : newOp}, 350)
+    headerDiv.animate({bottom : btm}, 350, function() {
+      amAnimating = false
+    })
   }
 
   function toggleHeaderOn() {
-    var opacity = parseInt(headerDiv.css('opacity'), 10)
-    if (opacity < 1) headerDiv.animate({opacity : 1.0}, 350)
+    var opacity = parseInt(searchBar.css('opacity'), 10)
+    if (opacity === 1) return
+    var newOp = 1.0
+      , btm = '0px'
+
+    visualGrooveTitle.animate({opacity : newOp}, 350)
+    searchBar.animate({opacity : newOp}, 350)
+    headerDiv.animate({bottom : btm}, 350, function() {
+      amAnimating = false
+    })
   }
 
   var toggleHeaderDiv = (function() {
