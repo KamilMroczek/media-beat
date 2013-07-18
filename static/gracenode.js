@@ -11,8 +11,10 @@ var getTrackMood = function(cb) {
       dataType: 'jsonp',
       success: function(results){
         var trackData = extractRelevantTrackData(results);
-        tempoTiming = getTempoTiming(trackData["tempo"])
-        transitionTiming = getTempoTransitionTime()
+          , tempo = trackData.tempo
+        console.log('gracenode tempo -> %s', tempo)
+        tempoTiming = getTempoTiming(tempo)
+        transitionTiming = getTempoTransitionTime(tempo)
         console.log('gracenode -> time-between-photos: %s  transition-time: %s', tempoTiming, transitionTiming)
         cb({"mood": trackData["mood"], "tempo": tempoTiming})
       }
