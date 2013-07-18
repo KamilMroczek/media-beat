@@ -3,6 +3,7 @@ var restify = require('restify')
   , server = restify.createServer()
   , path = require('path')
   , filed = require('filed')
+  , async = require('async')
   , PORT = process.env.PORT || 8081
   , bing = require('./bing.js')
   , flickr = require('./flickr.js')
@@ -41,32 +42,58 @@ server.get('/flickr/:query', function(req, res) {
 
 server.get('/images/:artist/:mood/:track', function (req, res) {
   console.log('getting images for artist: %s \tmood: %s \ttrack: %s', req.params.artist, req.params.mood, req.params.track )
-  bing(req.params.artist, function(e, artistArray) {
-    bing(req.params.mood, function(e, moodArray) {
-      bing(req.params.track, function(e, trackArray) {
-        res.setHeader('Content-Type', 'application/json')
-        console.log('returning images')
-        var randomImages = []
-        var i = 0;
-        while(artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0) {
-          if(artistArray.length > 0) {
-            randomImages.push(artistArray.shift())
-          }
-          if(moodArray.length > 0) {
-            var url = moodArray.shift()
-            if(i < 1 || (i % 8) == 0) {
-              console.log("i=" + i + ", adding")
-              randomImages.push(url)
-            }
-          }
-          if(trackArray.length > 0) {
-            randomImages.push(trackArray.shift())
-          }
-          i++;
+  async.parallel({
+    bingArtist: function(cb) {
+      bing(req.params.artist, cb)
+    },
+    bingTrack: function(cb) {
+      bing(req.params.track, cb)
+    },
+    bingMood: function(cb) {
+      bing(req.params.mood, cb)
+    },
+    flickrTrack: function(cb) {
+      flickr(req.params.track, cb)
+    },
+    flickrArtist: function(cb) {
+      flickr(req.params.artist, cb)
+    }
+  }, function(err, allResults) {
+    if (err) return res.end(err)
+
+    var artistArray = allResults.bingArtist
+      , moodArray = allResults.bingMood
+      , trackArray = allResults.bingTrack
+      , flTrackArray = allResults.flickrTrack
+      , flAristArray = allResults.flickrArtist
+      , randomImages = []
+      , i = 0
+
+    while(artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0 || flTrackArray.length > 0) {
+      if(artistArray.length > 0) {
+        randomImages.push(artistArray.shift())
+      }
+      if(moodArray.length > 0) {
+        var url = moodArray.shift()
+        if(i < 1 || (i % 8) === 0) {
+          //console.log("i=" + i + ", adding")
+          randomImages.push(url)
         }
-        res.end(JSON.stringify({images : JSON.stringify(randomImages)}))
-      })
-    })
+      }
+      if(trackArray.length > 0) {
+        randomImages.push(trackArray.shift())
+      }
+      if(flTrackArray.length > 0) {
+        randomImages.push(flTrackArray.shift())
+      }
+      if(flAristArray.length > 0) {
+        randomImages.push(flAristArray.shift())
+      }
+      i++;
+    }
+
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({images : randomImages}))
   })
 })
 
