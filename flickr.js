@@ -12,6 +12,7 @@ function search(txt, cb) {
     , content_type : 1 //json
     , api_key : API_KEY
     , format : 'json'
+    , method : 'flickr.photos.search'  //API endpoint
     , nojsoncallback : 1 //give us json data, (do not give us a function)
   }
   request({url : flickrUrl.format(), json : true}, function (err, res, json) {
