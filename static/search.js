@@ -38,7 +38,7 @@ $(document).ready(function () { R.ready(function() {
 
   R.player.on('change:playingSource', function() {
     console.log('playing source changed')
-    loadImages()
+    //loadImages()
     updateUI()
   })
 
