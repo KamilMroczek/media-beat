@@ -1,4 +1,8 @@
-
+/*global
+  $ : true,
+  console : true,
+  R : true, document:true, getImages:true, getCurrentArtist:true, rdioRealtimeSearch:true, window:true, getCurrentTrackName:true
+*/
 R.ready(function() {
   console.log('rdio is ready')
   if (!R.authenticated()){
@@ -6,6 +10,34 @@ R.ready(function() {
     R.authenticate()
   }
 })
+
+var types = {
+    t : 'track'
+  , a : 'album'
+  , p : 'playlist'
+}
+function createLabel(itm) {
+  var t = itm.type
+    , track
+    , artist
+    , albumOrPlaylist
+
+  if (t === 't') { //track
+    track = itm.name
+    artist = itm.arist
+    albumOrPlaylist = itm.album
+  } else if (t === 'a') { //album
+    track = ''
+    artist = itm.arist
+    albumOrPlaylist = itm.name
+  } else if (t === 'p') { //playlist
+    track = ''
+    artist = ''
+    albumOrPlaylist = itm.name
+  }
+
+  return track + ' - ' + artist + ' - ' + albumOrPlaylist + ' - ' + '[' + types[t] + ']'
+}
 
 function makeReq(sQuery) {
   var req = {
@@ -26,7 +58,7 @@ function rdioRealtimeSearch(txtObj, cb) {
       , ret = []
     results.forEach(function(itm) {
       var obj = {}
-      obj.label = itm.name +  ' [' + (itm.type ? itm.type : '') + ']'
+      obj.label = createLabel(itm)
       obj.play = function() {
         R.player.play({source : itm.key})
       }
