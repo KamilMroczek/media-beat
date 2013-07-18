@@ -44,51 +44,50 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
   console.log('getting images for artist: %s \tmood: %s \ttrack: %s', req.params.artist, req.params.mood, req.params.track )
   async.parallel({
     bingArtist: function(cb) {
-      flickr(req.params.artist, cb)
+      bing(req.params.artist, cb)
     },
     bingTrack: function(cb) {
+      bing(req.params.track, cb)
+    },
+    flickrMood: function(cb) {
+      flickr(req.params.mood, cb)
+    },
+    flickrTrack: function(cb) {
       flickr(req.params.track, cb)
     },
-    bingMood: function(cb) {
-      flickr(req.params.mood, cb)
-    }//,
-    //flickrTrack: function(cb) {
-    //  flickr(req.params.track, cb)
-    //},
-    //flickrArtist: function(cb) {
-    //  flickr(req.params.artist, cb)
-    //}
+    flickrArtist: function(cb) {
+      flickr(req.params.artist, cb)
+    }
   }, function(err, allResults) {
     if (err) return res.end(err)
 
     var artistArray = allResults.bingArtist
-      , moodArray = allResults.bingMood
+      , moodArray = allResults.flickrMood
       , trackArray = allResults.bingTrack
-      //, flTrackArray = allResults.flickrTrack
-      //, flAristArray = allResults.flickrArtist
+      , flTrackArray = allResults.flickrTrack
+      , flAristArray = allResults.flickrArtist
       , randomImages = []
       , i = 0
 
-    while(artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 /*|| flAristArray.length > 0 || flTrackArray.length > 0*/) {
+    while(artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0 || flTrackArray.length > 0) {
       if(artistArray.length > 0) {
         randomImages.push(artistArray.shift())
       }
       if(moodArray.length > 0) {
         var url = moodArray.shift()
-        if(i < 1 || (i % 8) === 0) {
-          //console.log("i=" + i + ", adding")
+        if(i < 1 || (i % 4) === 0) {
           randomImages.push(url)
         }
       }
       if(trackArray.length > 0) {
         randomImages.push(trackArray.shift())
       }
-      //if(flTrackArray.length > 0) {
-      //  randomImages.push(flTrackArray.shift())
-      //}
-      //if(flAristArray.length > 0) {
-      //  randomImages.push(flAristArray.shift())
-      //}
+      if(flTrackArray.length > 0) {
+        randomImages.push(flTrackArray.shift())
+      }
+      if(flAristArray.length > 0) {
+        randomImages.push(flAristArray.shift())
+      }
       i++;
     }
 
