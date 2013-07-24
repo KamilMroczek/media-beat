@@ -13,7 +13,7 @@ module.exports = function(query, cb) {
   urlObj.query = {
       Query : "'"+query+"'"
     , '$format' : 'json'
-    , ImageFilters: "'Size:Large+Aspect:Wide+Aspect:Tall'"
+    , ImageFilters: "'Size:Large+Aspect:Wide'"
   }
 
   var options = {
