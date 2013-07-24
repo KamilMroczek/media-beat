@@ -34,9 +34,10 @@ module.exports = function(query, cb) {
 function formatPictureArray(json) {
   var ret = []
   json.d.results.forEach(function (itm) {
-    var obj = {}
-    obj.url = itm.MediaUrl
-    ret.push(obj)
+    ret.push({
+        url : itm.MediaUrl
+      , __webSource : 'bing'
+    })
   })
   //console.log(ret)
   return ret

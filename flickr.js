@@ -16,7 +16,7 @@ function search(txt, cb) {
     , nojsoncallback : 1 //give us json data, (do not give us a function)
   }
   request({url : flickrUrl.format(), json : true}, function (err, res, json) {
-    console.log('flickr response:\n%s', JSON.stringify(json))
+    //console.log('flickr response:\n%s', JSON.stringify(json))
     if (err) cb(err)
     else cb(null, formatPictureArray(json))
   })
@@ -28,7 +28,10 @@ function formatPictureArray(json) {
   var ret = []
   json.photos.photo.forEach(function (pic) {
     var imgUrl = 'http://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_b.jpg' //b is large size
-    ret.push({url : imgUrl})
+    ret.push({
+        url : imgUrl
+      , __webSource : 'flickr'
+    })
   })
 
   return ret

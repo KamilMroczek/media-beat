@@ -11,5 +11,10 @@ Winner of Gracenote API Prize
 - Taher D
 - Kamil Mroczek
 
-https://skydrive.live.com/view.aspx?resid=9C9479871FBFA822!112&app=Word&authkey=!ANNnJQREB0kDC04)
-http://www.bing.com/developers/s/APIBasics.html
+#### API Docs
+* [rdio api] (http://www.rdio.com/developers/docs/)
+* [gracenote api] (https://developer.gracenote.com/web-api)
+* [bing api reference 1] (https://skydrive.live.com/view.aspx?resid=9C9479871FBFA822!112&app=Word&authkey=!ANNnJQREB0kDC04)
+* [bing api reference 1] (http://www.bing.com/developers/s/APIBasics.html)
+* [flickr api] (http://www.flickr.com/services/api/)
+
