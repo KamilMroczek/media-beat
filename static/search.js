@@ -11,6 +11,7 @@ $(document).ready(function () { R.ready(function() {
     , imageResults = $('#image_results')
     , headerDiv = $('#header_div')
     , searchBar = $('#search_bar')
+    , devStatus = $('#dev-status')
     , visualGrooveTitle = $('#visual_groove_title')
     , previousTxt = ''
     , allImages = []
@@ -25,7 +26,7 @@ $(document).ready(function () { R.ready(function() {
       imageResults.empty()
       allImages = []
       images.forEach(function(img) {
-        img = $('<img src="'+img.url+'" class="displayed_image"></img>')
+        img.htmlElement = $('<img src="'+img.url+'" class="displayed_image"></img>')
         //imageResults.append(imgHtml)
         allImages.push(img)
       })
@@ -123,12 +124,13 @@ $(document).ready(function () { R.ready(function() {
       //updateUI()
       var img = allImages.shift()
         , transitionTime = getTempoTransitionTime()
-      //img.css('opacity', 0.0)
-      //imageResults.empty()
-      //imageResults.append(img)
+
+      //fade out current slide
       imageResults.animate({opacity:0.0, duration:transitionTime}, function() {
         imageResults.empty()
-        imageResults.append(img)
+        imageResults.append(img.htmlElement)
+        devStatus.html('image source: ' + img.__webSource)
+        //next slide
         imageResults.animate({opacity:1.0, duration:transitionTime})
       })
       TIMEOUT_ID = setTimeout(animate, getTempoTimeBetweenImages() + transitionTime*2.0)
