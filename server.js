@@ -49,11 +49,8 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
     bingTrack: function(cb) {
       bing(req.params.track, cb)
     },
-    flickrMood: function(cb) {
-      flickr(req.params.mood, cb)
-    },
-    flickrTrack: function(cb) {
-      flickr(req.params.track, cb)
+    bingMood: function(cb) {
+      bing(req.params.mood, cb)
     },
     flickrArtist: function(cb) {
       flickr(req.params.artist, cb)
@@ -62,14 +59,13 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
     if (err) return res.end(err)
 
     var artistArray = allResults.bingArtist
-      , moodArray = allResults.flickrMood
+      , moodArray = allResults.bingMood
       , trackArray = allResults.bingTrack
-      , flTrackArray = allResults.flickrTrack
       , flAristArray = allResults.flickrArtist
       , randomImages = []
       , i = 0
 
-    while (artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0 || flTrackArray.length > 0) {
+    while (artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0) {
       if(artistArray.length > 0) {
         randomImages.push(artistArray.shift())
       }
@@ -81,9 +77,6 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
       }
       if(trackArray.length > 0) {
         randomImages.push(trackArray.shift())
-      }
-      if(flTrackArray.length > 0) {
-        randomImages.push(flTrackArray.shift())
       }
       if(flAristArray.length > 0) {
         randomImages.push(flAristArray.shift())
