@@ -14,7 +14,7 @@ Winner of Gracenote API Prize
 #### API Docs
 * [rdio api] (http://www.rdio.com/developers/docs/)
 * [gracenote api] (https://developer.gracenote.com/web-api)
-* [bing api reference 1] (https://skydrive.live.com/view.aspx?resid=9C9479871FBFA822!112&app=Word&authkey=!ANNnJQREB0kDC04)
-* [bing api reference 1] (http://www.bing.com/developers/s/APIBasics.html)
+* [bing api 1] (https://skydrive.live.com/view.aspx?resid=9C9479871FBFA822!112&app=Word&authkey=!ANNnJQREB0kDC04)
+* [bing api 2] (http://www.bing.com/developers/s/APIBasics.html)
 * [flickr api] (http://www.flickr.com/services/api/)
 
