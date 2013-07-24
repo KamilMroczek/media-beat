@@ -60,16 +60,16 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
 
   async.parallel({
     bingArtist: function(cb) {
-      bing(artist, tagCallbackWithType('artist-image-'+artist, cb))
+      bing(artist, tagCallbackWithType('image-artist-'+artist, cb))
     },
     bingTrack: function(cb) {
-      bing(track, tagCallbackWithType('track-image-'+track, cb))
+      bing(track, tagCallbackWithType('image-track-'+track, cb))
     },
     bingMood: function(cb) {
-      bing(mood, tagCallbackWithType('mood-image-' + mood, cb))
+      bing(mood, tagCallbackWithType('image-mood-' + mood, cb))
     },
     flickrArtist : function (cb) {
-      flickr(artist, tagCallbackWithType('artist-image-'+artist, cb))
+      flickr(artist, tagCallbackWithType('image-artist-'+artist, cb))
     }
   }, function(err, allResults) {
     if (err) return res.end(err)
