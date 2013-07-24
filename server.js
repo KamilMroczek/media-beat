@@ -42,18 +42,29 @@ server.get('/flickr/:query', function(req, res) {
 
 server.get('/images/:artist/:mood/:track', function (req, res) {
   console.log('getting images for artist: %s \tmood: %s \ttrack: %s', req.params.artist, req.params.mood, req.params.track )
+
+  function tagWithType (type, cb) {
+    return function(err, results) {
+      if (err) return cb(err)
+      results.forEach(function(itm) {
+        itm.__webType = type
+      })
+      cb(null, results)
+    }
+  }
+
   async.parallel({
     bingArtist: function(cb) {
-      bing(req.params.artist, cb)
+      bing(req.params.artist, tagWithType('artist-image', cb))
     },
     bingTrack: function(cb) {
-      bing(req.params.track, cb)
+      bing(req.params.track, tagWithType('track-image', cb))
     },
     bingMood: function(cb) {
-      bing(req.params.mood, cb)
+      bing(req.params.mood, tagWithType('mood-image', cb))
     },
-    flickrArtist: function(cb) {
-      flickr(req.params.artist, cb)
+    flickrArtist : function (cb) {
+      flickr(req.params.artist, tagWithType('artist-image', cb))
     }
   }, function(err, allResults) {
     if (err) return res.end(err)
@@ -66,19 +77,19 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
       , i = 0
 
     while (artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0) {
-      if(artistArray.length > 0) {
+      if (artistArray.length > 0) {
         randomImages.push(artistArray.shift())
       }
-      if(moodArray.length > 0) {
+      if (moodArray.length > 0) {
         var url = moodArray.shift()
         if(i < 1 || (i % 5) === 0) {
           randomImages.push(url)
         }
       }
-      if(trackArray.length > 0) {
+      if (trackArray.length > 0) {
         randomImages.push(trackArray.shift())
       }
-      if(flAristArray.length > 0) {
+      if (flAristArray.length > 0) {
         randomImages.push(flAristArray.shift())
       }
       i++;

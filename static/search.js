@@ -129,7 +129,7 @@ $(document).ready(function () { R.ready(function() {
       imageResults.animate({opacity:0.0, duration:transitionTime}, function() {
         imageResults.empty()
         imageResults.append(img.htmlElement)
-        devStatus.html('image source: ' + img.__webSource)
+        devStatus.html('image source:' + img.__webSource + ' type:' + img.__webType)
         //next slide
         imageResults.animate({opacity:1.0, duration:transitionTime})
       })
