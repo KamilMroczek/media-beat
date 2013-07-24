@@ -13,7 +13,7 @@ module.exports = function(query, cb) {
   urlObj.query = {
       Query : "'"+query+"'"
     , '$format' : 'json'
-    , ImageFilters: "'Size:Large'"
+    , ImageFilters: "'Size:Large+Aspect:Wide+Aspect:Tall'"
   }
 
   var options = {
@@ -34,9 +34,10 @@ module.exports = function(query, cb) {
 function formatPictureArray(json) {
   var ret = []
   json.d.results.forEach(function (itm) {
-    var obj = {}
-    obj.url = itm.MediaUrl
-    ret.push(obj)
+    ret.push({
+        url : itm.MediaUrl
+      , __webSource : 'bing'
+    })
   })
   //console.log(ret)
   return ret

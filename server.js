@@ -69,7 +69,7 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
       , randomImages = []
       , i = 0
 
-    while(artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0 || flTrackArray.length > 0) {
+    while (artistArray.length > 0 || moodArray.length > 0 || trackArray.length > 0 || flAristArray.length > 0 || flTrackArray.length > 0) {
       if(artistArray.length > 0) {
         randomImages.push(artistArray.shift())
       }
