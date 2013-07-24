@@ -41,11 +41,16 @@ server.get('/flickr/:query', function(req, res) {
 })
 
 server.get('/images/:artist/:mood/:track', function (req, res) {
-  console.log('getting images for artist: %s \tmood: %s \ttrack: %s', req.params.artist, req.params.mood, req.params.track )
+  var artist = req.params.artist
+    , mood = req.params.mood
+    , track = req.params.track
+
+  console.log('getting images for artist: %s \tmood: %s \ttrack: %s', artist, mood, track)
 
   function tagCallbackWithType (type, cb) {
     return function(err, results) {
       if (err) return cb(err)
+
       results.forEach(function(itm) {
         itm.__webType = type
       })
@@ -55,16 +60,16 @@ server.get('/images/:artist/:mood/:track', function (req, res) {
 
   async.parallel({
     bingArtist: function(cb) {
-      bing(req.params.artist, tagCallbackWithType('artist-image', cb))
+      bing(artist, tagCallbackWithType('artist-image-'+artist, cb))
     },
     bingTrack: function(cb) {
-      bing(req.params.track, tagCallbackWithType('track-image', cb))
+      bing(track, tagCallbackWithType('track-image-'+track, cb))
     },
     bingMood: function(cb) {
-      bing(req.params.mood, tagCallbackWithType('mood-image', cb))
+      bing(mood, tagCallbackWithType('mood-image-' + mood, cb))
     },
     flickrArtist : function (cb) {
-      flickr(req.params.artist, tagCallbackWithType('artist-image', cb))
+      flickr(artist, tagCallbackWithType('artist-image-'+artist, cb))
     }
   }, function(err, allResults) {
     if (err) return res.end(err)
