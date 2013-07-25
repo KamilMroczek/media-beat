@@ -13,6 +13,9 @@ $(document).ready(function () { R.ready(function() {
     , searchBar = $('#search_bar')
     , devStatus = $('#dev-status')
     , visualGrooveTitle = $('#visual_groove_title')
+    , arrowUp = $('<img src=\'/static/Arrow_Up.png\' height=\'100\' width=\'100\'')
+    , arrowDown = $('<img src=\'/static/Arrow_Down.png\' height=\'100\' width=\'100\'')
+    , arrowImage = $('#arrow_image')
     , previousTxt = ''
     , allImages = []
     , autocompleteObj
@@ -66,6 +69,14 @@ $(document).ready(function () { R.ready(function() {
     } else if (isPlaying()) {
       playPause.html('Pause' + description)
     }
+    updateArrowImage()
+  }
+  function updateArrowImage() {
+    var img
+    arrowImage.empty()
+    if (headerIsMaximized()) img = arrowUp
+    else img = arrowDown
+    arrowImage.append(img)
   }
 
   function isPaused() {
@@ -108,20 +119,15 @@ $(document).ready(function () { R.ready(function() {
     return li
   }
 
-  imageResults.on('click', function() {
-    toggleHeaderDiv()
-  })
-  $(document).on('click', function() {
-    var opacity = parseInt(headerDiv.css('opacity'), 10)
-    if (opacity === 0) toggleHeaderDiv()
-  })
+  imageResults.on('click', toggleHeaderDiv)
+  arrowImage.on('click', toggleHeaderDiv)
+  $(document).on('click', toggleHeaderOn)
 
   //animate through images
   var TIMEOUT_ID
   function resumeSlideshow() {
     clearTimeout(TIMEOUT_ID)
     function animate() {
-      //updateUI()
       var img = allImages.shift()
         , transitionTime = getTempoTransitionTime()
 
@@ -147,24 +153,30 @@ $(document).ready(function () { R.ready(function() {
 
   function toggleHeaderOff() {
     var opacity = parseInt(searchBar.css('opacity'), 10)
-    if (opacity === 0) return
-    var newOp = 0.0
-      , btm = '' + playPause.offset().top*0.8 + 'px'
+    if (headerIsMaximized()) toggleHeaderDiv()
+    //var newOp = 0.0
+    //  , btm = '' + playPause.offset().top*0.8 + 'px'
 
-    visualGrooveTitle.animate({opacity : newOp}, 350)
-    searchBar.animate({opacity : newOp}, 350)
-    headerDiv.animate({bottom : btm}, 350)
+    //visualGrooveTitle.animate({opacity : newOp}, 350)
+    //searchBar.animate({opacity : newOp}, 350)
+    //headerDiv.animate({bottom : btm}, 350)
   }
 
   function toggleHeaderOn() {
     var opacity = parseInt(searchBar.css('opacity'), 10)
-    if (opacity === 1) return
-    var newOp = 1.0
-      , btm = '0px'
+    if (headerIsMinimized()) toggleHeaderDiv()
+    //var newOp = 1.0
+    //  , btm = '0px'
 
-    visualGrooveTitle.animate({opacity : newOp}, 350)
-    searchBar.animate({opacity : newOp}, 350)
-    headerDiv.animate({bottom : btm}, 350)
+    //visualGrooveTitle.animate({opacity : newOp}, 350)
+    //searchBar.animate({opacity : newOp}, 350)
+    //headerDiv.animate({bottom : btm}, 350)
+  }
+  function headerIsMaximized() {
+    return parseInt(searchBar.css('opacity'), 10) === 1.0
+  }
+  function headerIsMinimized() {
+    return parseInt(searchBar.css('opacity'), 10) === 0.0
   }
 
   var toggleHeaderDiv = (function() {
@@ -178,7 +190,7 @@ $(document).ready(function () { R.ready(function() {
         , btm
       //if (opacity > 0) {
       console.log('toggling header div')
-      if (curBtm === 0) {
+      if (headerIsMaximized()) {
         newOp = 0.0
         btm = '' + playPause.offset().top*0.8 + 'px'
       } else {
