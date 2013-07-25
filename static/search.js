@@ -69,11 +69,11 @@ $(document).ready(function () { R.ready(function() {
   }
   function updateArrowImage() {
     if (headerIsMaximized()){ //point up
-      arrowUp.css('display', 'block')
-      arrowDown.css('display', 'hidden')
+      arrowUp.css('display', 'inline')
+      arrowDown.css('display', 'none')
     } else { //point down
-      arrowDown.css('display', 'block')
-      arrowUp.css('display', 'hidden')
+      arrowDown.css('display', 'inline')
+      arrowUp.css('display', 'none')
     }
   }
 
