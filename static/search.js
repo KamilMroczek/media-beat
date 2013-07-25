@@ -117,9 +117,15 @@ $(document).ready(function () { R.ready(function() {
     return li
   }
 
-  imageResults.on('click', toggleHeaderDiv)
-  arrowImage.on('click', toggleHeaderDiv)
-  $(document).on('click', toggleHeaderOn)
+  imageResults.on('click', function() {
+    toggleHeaderDiv()
+  })
+  arrowImage.on('click', function() {
+    toggleHeaderDiv()
+  })
+  $(document).on('click', function() {
+    toggleHeaderOff()
+  })
 
   //animate through images
   var TIMEOUT_ID
@@ -154,23 +160,11 @@ $(document).ready(function () { R.ready(function() {
   function toggleHeaderOff() {
     var opacity = parseInt(searchBar.css('opacity'), 10)
     if (headerIsMaximized()) toggleHeaderDiv()
-    //var newOp = 0.0
-    //  , btm = '' + playPause.offset().top*0.8 + 'px'
-
-    //visualGrooveTitle.animate({opacity : newOp}, 350)
-    //searchBar.animate({opacity : newOp}, 350)
-    //headerDiv.animate({bottom : btm}, 350)
   }
 
   function toggleHeaderOn() {
     var opacity = parseInt(searchBar.css('opacity'), 10)
     if (headerIsMinimized()) toggleHeaderDiv()
-    //var newOp = 1.0
-    //  , btm = '0px'
-
-    //visualGrooveTitle.animate({opacity : newOp}, 350)
-    //searchBar.animate({opacity : newOp}, 350)
-    //headerDiv.animate({bottom : btm}, 350)
   }
   function headerIsMaximized() {
     return parseInt(searchBar.css('opacity'), 10) === 1.0
@@ -198,8 +192,8 @@ $(document).ready(function () { R.ready(function() {
         btm = '0px'
       }
 
-      $('#visual_groove_title').animate({opacity : newOp}, 350)
-      $('#search_bar').animate({opacity : newOp}, 350)
+      visualGrooveTitle.animate({opacity : newOp}, 350)
+      searchBar.animate({opacity : newOp}, 350)
       headerDiv.animate({bottom : btm}, 350, function() {
         amAnimating = false
         updateArrowImage()
