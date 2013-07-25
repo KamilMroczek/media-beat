@@ -30,24 +30,20 @@ $(document).ready(function () { R.ready(function() {
       allImages = []
       images.forEach(function(img) {
         img.htmlElement = $('<img src="'+img.url+'" class="displayed_image"></img>')
-        //imageResults.append(imgHtml)
         allImages.push(img)
       })
       toggleHeaderOff()
       resumeSlideshow()
       if (isPaused()) pauseSlideshow() //only show first image if paused
-
     })
   }
 
   R.player.on('change:playingSource', function() {
     console.log('playing source changed')
-    //loadImages()
     updateUI()
   })
 
   R.player.on('change:playingTrack', function() {
-    //allImages = []
     console.log('playing track changed')
     loadImages()
     updateUI()
@@ -128,11 +124,11 @@ $(document).ready(function () { R.ready(function() {
   function resumeSlideshow() {
     clearTimeout(TIMEOUT_ID)
     function animate() {
-      var img = allImages.shift()
-        , transitionTime = getTempoTransitionTime()
+      var transitionTime = getTempoTransitionTime()
 
       //fade out current slide
       imageResults.animate({opacity:0.0, duration:transitionTime}, function() {
+        var img = allImages.shift()
         imageResults.empty()
         imageResults.append(img.htmlElement)
         devStatus.html('image source:' + img.__webSource + ' type:' + img.__webType)
@@ -201,8 +197,8 @@ $(document).ready(function () { R.ready(function() {
       $('#visual_groove_title').animate({opacity : newOp}, 350)
       $('#search_bar').animate({opacity : newOp}, 350)
       headerDiv.animate({bottom : btm}, 350, function() {
-        updateArrowImage()
         amAnimating = false
+        updateArrowImage()
       })
     }
   })()
