@@ -13,8 +13,8 @@ var getTrackMood = function(cb) {
         var trackData = extractRelevantTrackData(results)
           , tempo = trackData.tempo
         console.log('gracenode tempo -> %s', tempo)
-        tempoTiming = getTempoTiming(tempo)
-        transitionTiming = getTempoTransitionTime(tempo)
+        tempoTiming = setTempoTime(tempo)
+        transitionTiming = setTransitionTime(tempo)
         console.log('gracenode -> time-between-photos: %s  transition-time: %s', tempoTiming, transitionTiming)
         cb({"mood": trackData["mood"], "tempo": tempoTiming})
       }
@@ -49,7 +49,7 @@ function extractRelevantTrackData(results) {
   return trackData;
 };
 
-function getTempoTiming(tempo) {
+function setTempoTime(tempo) {
   if(tempo == "Slow Tempo") {
     return 4500;
   } else if(tempo == "Medium Tempo") {
@@ -60,7 +60,7 @@ function getTempoTiming(tempo) {
     return 2000;
   }
 }
-function getTempoTransitionTime(tempo) {
+function setTransitionTime(tempo) {
   if(tempo == "Slow Tempo") {
     return 500;
   } else if(tempo == "Medium Tempo") {
