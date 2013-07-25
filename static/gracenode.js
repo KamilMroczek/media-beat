@@ -55,7 +55,7 @@ function setTempoTime(tempo) {
   } else if(tempo == "Medium Tempo") {
     return 2000;
   } else if(tempo == "Fast Tempo") {
-    return 1100;
+    return 1300;
   } else {
     return 2000;
   }
@@ -66,7 +66,7 @@ function setTransitionTime(tempo) {
   } else if(tempo == "Medium Tempo") {
     return 300;
   } else if(tempo == "Fast Tempo") {
-    return 120;
+    return 200;
   } else {
     return 300;
   }
