@@ -182,7 +182,6 @@ $(document).ready(function () { R.ready(function() {
         , curBtm = parseInt(headerDiv.css('bottom'), 10)
         , newOp
         , btm
-      //if (opacity > 0) {
       console.log('toggling header div')
       if (headerIsMaximized()) {
         newOp = 0.0
