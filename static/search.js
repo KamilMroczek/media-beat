@@ -13,8 +13,8 @@ $(document).ready(function () { R.ready(function() {
     , searchBar = $('#search_bar')
     , devStatus = $('#dev-status')
     , visualGrooveTitle = $('#visual_groove_title')
-    , arrowUp = $('<img src=\'/static/Arrow_Up.png\' height=\'100\' width=\'100\'')
-    , arrowDown = $('<img src=\'/static/Arrow_Down.png\' height=\'100\' width=\'100\'')
+    , arrowUp = $('<img src=\'/static/Arrow_Up.png\' height=\'100\' width=\'100\'></img>')
+    , arrowDown = $('<img src=\'/static/Arrow_Down.png\' height=\'100\' width=\'100\'></img>')
     , arrowImage = $('#arrow_image')
     , previousTxt = ''
     , allImages = []
