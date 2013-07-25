@@ -9,7 +9,7 @@ window.getImages = function(artist, track, cb) {
     console.log('getting images for query: ' + artist + ' and mood ' + mood + ' and track ' + track)
     console.log('tempo =' + ret.tempo)
     var url = '/images/'+encodeURIComponent(artist)+'/'+encodeURIComponent(mood)+'/'+encodeURIComponent(track)
-    url = url.replace(/\(/g, "").replace(/\)/g, "");
+    url = url.replace(/\(/g, "").replace(/\)/g, "")
     $.getJSON(url, function (resJson, status) {
       console.log('recieved images')
       var images = resJson.images

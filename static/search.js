@@ -13,8 +13,8 @@ $(document).ready(function () { R.ready(function() {
     , searchBar = $('#search_bar')
     , devStatus = $('#dev-status')
     , visualGrooveTitle = $('#visual_groove_title')
-    , arrowUp = $('<img src=\'/static/Arrow_Up.png\' height=\'100\' width=\'100\'></img>')
-    , arrowDown = $('<img src=\'/static/Arrow_Down.png\' height=\'100\' width=\'100\'></img>')
+    , arrowUp = $('#arrow_up')
+    , arrowDown = $('#arrow_down')
     , arrowImage = $('#arrow_image')
     , previousTxt = ''
     , allImages = []
@@ -68,11 +68,13 @@ $(document).ready(function () { R.ready(function() {
     updateArrowImage()
   }
   function updateArrowImage() {
-    var img
-    arrowImage.empty()
-    if (headerIsMaximized()) img = arrowUp
-    else img = arrowDown
-    arrowImage.append(img)
+    if (headerIsMaximized()){ //point up
+      arrowUp.css('display', 'block')
+      arrowDown.css('display', 'hidden')
+    } else { //point down
+      arrowDown.css('display', 'block')
+      arrowUp.css('display', 'hidden')
+    }
   }
 
   function isPaused() {
