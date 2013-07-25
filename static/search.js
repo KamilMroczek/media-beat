@@ -68,16 +68,13 @@ $(document).ready(function () { R.ready(function() {
     updateArrowImage()
   }
   function updateArrowImage() {
+    var t = getTempoTransitionTime()
     if (headerIsMaximized()){ //point up
-      arrowUp.animate({opacity:1})
-      arrowDown.animate({opacity:0})
-      //arrowUp.css('display', 'inline')
-      //arrowDown.css('display', 'none')
+      arrowUp.animate({opacity:1}, t)
+      arrowDown.animate({opacity:0}, t)
     } else { //point down
-      arrowUp.animate({opacity:0})
-      arrowDown.animate({opacity:1})
-      //arrowDown.css('display', 'inline')
-      //arrowUp.css('display', 'none')
+      arrowUp.animate({opacity:0}, t)
+      arrowDown.animate({opacity:1}, t)
     }
   }
 
@@ -139,7 +136,7 @@ $(document).ready(function () { R.ready(function() {
       var transitionTime = getTempoTransitionTime()
 
       //fade out current slide
-      imageResults.animate({opacity:0.0, duration:transitionTime}, function() {
+      imageResults.animate({opacity:0.0}, transitionTime, function() {
         var img = allImages.shift()
         if (!img) return
 
@@ -147,7 +144,7 @@ $(document).ready(function () { R.ready(function() {
         imageResults.append(img.htmlElement)
         devStatus.html('image source:' + img.__webSource + ' type:' + img.__webType)
         //next slide
-        imageResults.animate({opacity:1.0, duration:transitionTime})
+        imageResults.animate({opacity:1.0}, transitionTime)
       })
       TIMEOUT_ID = setTimeout(animate, getTempoTimeBetweenImages() + transitionTime*2.0)
     }
