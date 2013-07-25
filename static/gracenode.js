@@ -51,24 +51,24 @@ function extractRelevantTrackData(results) {
 
 function getTempoTiming(tempo) {
   if(tempo == "Slow Tempo") {
-    return 6000;
+    return 4500;
   } else if(tempo == "Medium Tempo") {
-    return 3000;
+    return 2000;
   } else if(tempo == "Fast Tempo") {
-    return 1800;
+    return 1100;
   } else {
-    return 3000;
+    return 2000;
   }
 }
 function getTempoTransitionTime(tempo) {
   if(tempo == "Slow Tempo") {
-    return 700;
+    return 500;
   } else if(tempo == "Medium Tempo") {
-    return 350;
+    return 300;
   } else if(tempo == "Fast Tempo") {
-    return 150;
+    return 120;
   } else {
-    return 350;
+    return 300;
   }
 }
 
