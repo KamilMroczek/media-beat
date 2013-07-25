@@ -201,6 +201,7 @@ $(document).ready(function () { R.ready(function() {
       $('#visual_groove_title').animate({opacity : newOp}, 350)
       $('#search_bar').animate({opacity : newOp}, 350)
       headerDiv.animate({bottom : btm}, 350, function() {
+        updateArrowImage()
         amAnimating = false
       })
     }
