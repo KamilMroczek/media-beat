@@ -69,11 +69,15 @@ $(document).ready(function () { R.ready(function() {
   }
   function updateArrowImage() {
     if (headerIsMaximized()){ //point up
-      arrowUp.css('display', 'inline')
-      arrowDown.css('display', 'none')
+      arrowUp.animate({opacity:1})
+      arrowDown.animate({opacity:0})
+      //arrowUp.css('display', 'inline')
+      //arrowDown.css('display', 'none')
     } else { //point down
-      arrowDown.css('display', 'inline')
-      arrowUp.css('display', 'none')
+      arrowUp.animate({opacity:0})
+      arrowDown.animate({opacity:1})
+      //arrowDown.css('display', 'inline')
+      //arrowUp.css('display', 'none')
     }
   }
 
